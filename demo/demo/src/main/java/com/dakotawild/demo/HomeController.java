@@ -19,7 +19,7 @@ public class HomeController {
 	}
 
 	@GetMapping("/Darrell_URL")
-	public String getURLKobe() {
+	public String getURLDarrell() {
 		return "im still so confused";
 	}
 	
