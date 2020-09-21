@@ -13,6 +13,9 @@ public class HomeController {
 		return "Lakers 2020 NBA Champions confirmed :P";
 	}
 
-	
+	@GetMapping("/Kobe_URL")
+	public String getURLKobe() {
+		return "Week 5 yet done with school";
+	}
 	
 }
