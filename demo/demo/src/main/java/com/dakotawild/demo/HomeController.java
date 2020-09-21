@@ -17,6 +17,11 @@ public class HomeController {
 	public String getURLKobe() {
 		return "Week 5 yet done with school";
 	}
+
+	@GetMapping("/Darrell_URL")
+	public String getURLKobe() {
+		return "im still so confused";
+	}
 	
 	@GetMapping("/Dakota_URL")
 	public String getURLDakota() {
