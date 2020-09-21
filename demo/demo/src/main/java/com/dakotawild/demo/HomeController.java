@@ -22,4 +22,9 @@ public class HomeController {
 	public String getURLDakota() {
 		return "This is whack dot com";
 	}
+	
+	@GetMapping("/Celine_URL")
+	public String getURLCeline() {
+		return "What is school?";
+	}
 }
