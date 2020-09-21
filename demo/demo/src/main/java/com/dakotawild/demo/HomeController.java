@@ -18,4 +18,8 @@ public class HomeController {
 		return "Week 5 yet done with school";
 	}
 	
+	@GetMapping("/Dakota_URL")
+	public String getURLDakota() {
+		return "This is whack dot com";
+	}
 }
