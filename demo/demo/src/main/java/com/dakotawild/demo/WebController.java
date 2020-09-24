@@ -33,7 +33,7 @@ public class WebController {
         
     }
     
-    @GetMapping("/cal4j") 
+    @GetMapping("/ical4j") 
     public Calendar myCalendar(){
 	    Calendar calendar = new Calendar(); 
 	    calendar.getProperties().add(new ProdId("-//Celine Tran//iCal4j 1.0//EN")); 
