@@ -42,4 +42,31 @@ public class WebController {
 	    
 	    return cal; 
     }
+	
+	
+    @GetMapping("/guava")
+    public String guava() {
+        List<Integer> numbers = new ArrayList<Integer>();
+        numbers.add(28);
+        numbers.add(488);
+        numbers.add(32);
+        numbers.add(1);
+        numbers.add(3849);
+
+        Ordering ordering = Ordering.natural();
+        List<Integer> sortedNumbers = numbers;
+
+        String result = "Original list of numbers: ";
+        for(int i = 0; i < numbers.size(); ++i) {
+            result += numbers.get(i) + " ";
+        }
+
+        Collections.sort(numbers, ordering);
+        result += "\nSorted list: ";
+        for(int i = 0; i < numbers.size(); ++i) {
+            result += numbers.get(i) + " ";
+        }
+
+        return result;
+    }
 }
