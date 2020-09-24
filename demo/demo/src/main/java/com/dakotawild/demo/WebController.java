@@ -17,7 +17,9 @@ import net.fortuna.ical4j.model.property.Version;
 import net.fortuna.ical4j.model.property.CalScale; 
 import net.fortuna.ical4j.model.property.Location; 
 import net.fortuna.ical4j.model.property.Duration; 
-
+import net.fortuna.ical4j.model.TimeZone; 
+import net.fortuna.ical4j.model.DateTime; 
+import java.util.GregorianCalendar; 
 
 @RequestMapping
 @RestController
@@ -35,11 +37,22 @@ public class WebController {
     
     @GetMapping("/ical4j") 
     public Calendar myCalendar(){
+	    TimeZone tz = Utils.getTimezone("America/New_York"); 
+	    java.util.Calendar startDate = new GregorianCalendar(); 
+	    startDate.setTimeZone(tz);
+	    startDate.add(java.util.Calendar.DAY_OF_MONTH, 9); 
+	    startDate.set(java.util.Calendar.MINUTE, 0); 
+	    startDate.set(java.util.Calendar.SECOND, 0); 
+	    
+	    String eventName = "CS4800"; 
+	    DateTime start = new DateTime(startDate.getTime()); 
+	    start.setTimeZone(tz); 
+	    
 	    Calendar calendar = new Calendar(); 
 	    calendar.getProperties().add(new ProdId("-//Celine Tran//iCal4j 1.0//EN")); 
 	    calendar.getProperties().add(Version.VERSION_2_0); 
 	    calendar.getProperties().add(CalScale.GREGORIAN); 
-	    VEvent vEvent = new VEvent(); 
+	    VEvent vEvent = new VEvent(start, eventName); 
 	    vEvent.getProperties().add(new Uid("CS4800"));
 	    vEvent.getProperties().add(new Duration(null, "1H15M")); 
 	    vEvent.getProperties().add(new Location("Zoom")); 
