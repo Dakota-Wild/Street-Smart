@@ -14,6 +14,8 @@ import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.PropertyList; 
 import net.fortuna.ical4j.model.property.Uid; 
 
+import org.joda.money;
+
 @RequestMapping
 @RestController
 public class WebController {
@@ -68,5 +70,18 @@ public class WebController {
         }
 
         return result;
+    }
+
+    @GetMapping("/jodaMoney")
+    public String jodaMoney() {
+        Money money = Money.parse("USD 23.87");
+        Money money2 = Money.parse("USD 224.27");
+        Money money3 = Money.parse("USD 1213.87");
+  
+  
+        CurrencyUnit usd = CurrencyUnit.of("USD");
+        money = money.plus(Money.of(usd, 12.43d));
+        money2 = money.minusMajor(2);
+        money3 = money.multipliedBy(3.5d, RoundingMode.DOWN);
     }
 }
