@@ -83,5 +83,9 @@ public class WebController {
         money = money.plus(Money.of(usd, 12.43d));
         money2 = money.minusMajor(2);
         money3 = money.multipliedBy(3.5d, RoundingMode.DOWN);
+
+        String result = money.toString();
+
+        return result;
     }
 }
