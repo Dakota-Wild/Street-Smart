@@ -16,6 +16,8 @@ import net.fortuna.ical4j.model.property.Uid;
 
 import org.joda.money;
 
+import org.apache.commons.math3.random.MersenneTwister;
+
 @RequestMapping
 @RestController
 public class WebController {
@@ -87,5 +89,13 @@ public class WebController {
         String result = money.toString();
 
         return result;
+    }
+	
+    @GetMapping("/math")
+    public String randomScore() {
+	MersenneTwister rng = new MersenneTwister();
+	int num = rng.nextInt() % 100;
+	String result = "Your random number from (-100 to 100) is: " + num;
+	return result;
     }
 }
