@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import net.fortuna.ical4j.model.Calendar; 
 import net.fortuna.ical4j.model.component.VEvent; 
 import net.fortuna.ical4j.model.PropertyList; 
-import net.fortuna.ical4j.model.property.PropId; 
+import net.fortuna.ical4j.model.property.ProdId; 
 import net.fortuna.ical4j.model.property.Version; 
 import net.fortuna.ical4j.model.property.CalScale; 
 import net.fortuna.ical4j.model.property.Location; 
