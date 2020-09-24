@@ -35,8 +35,7 @@ public class WebController {
 	    calendar.set(java.util.Calendar.DAY_OF_MONTH, 1); 
 	
 	    VEvent newYears = new VEvent(calendar.getTime(), "New Years"); 
-	    UidGenerator ug = new UidGeneartor("1"); 
-	    newYears.getProperties().add(ug.generatedUid()); 
+	    newYears.getProperties().add(Utils.generatedUid()); 
 	    
 	    Calendar cal = new Calendar(); 
 	    cal.getComponents.add(newYears); 
