@@ -13,7 +13,6 @@ import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.component.VEvent; 
 import net.fortuna.ical4j.model.PropertyList; 
 import net.fortuna.ical4j.model.property.Uid; 
-import net.fortuna.ical4j.model.Date; 
 
 @RequestMapping
 @RestController
@@ -32,10 +31,10 @@ public class WebController {
     @GetMapping("/ical4j") 
     public Calendar myCalendar(){
 	    java.util.Calendar calendar = java.util.Calendar.getInstance(); 
-	    calendar.set(java.util.Calendar.Month, java.util.Calendar.JANUARY); 
+	    calendar.set(java.util.Calendar.MONTH, java.util.Calendar.JANUARY); 
 	    calendar.set(java.util.Calendar.DAY_OF_MONTH, 1); 
 	
-	    VEvent newYears = new VEvent(new Date(calendar.getTime()), "New Years"); 
+	    VEvent newYears = new VEvent(calendar.getTime(), "New Years"); 
 	    UidGenerator ug = new UidGeneartor("1"); 
 	    newYears.getProperties().add(ug.generatedUid()); 
 	    
