@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.mnode.ical4j.model.Calendar; 
-import org.mnode.ical4j.model.component.VEvent; 
-import org.mnode.ical4j.model.PropertyList; 
-import org.mnode.ical4j.model.property.PropId; 
-import org.mnode.ical4j.model.property.Version; 
-import org.mnode.ical4j.model.property.CalScale; 
-import org.mnode.ical4j.model.property.Location; 
-import org.mnode.ical4j.model.property.Duration; 
+import net.fortuna.ical4j.model.Calendar; 
+import net.fortuna.ical4j.model.component.VEvent; 
+import net.fortuna.ical4j.model.PropertyList; 
+import net.fortuna.ical4j.model.property.PropId; 
+import net.fortuna.ical4j.model.property.Version; 
+import net.fortuna.ical4j.model.property.CalScale; 
+import net.fortuna.ical4j.model.property.Location; 
+import net.fortuna.ical4j.model.property.Duration; 
 
 
 @RequestMapping
