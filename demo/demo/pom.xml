@@ -42,7 +42,6 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-<<<<<<< HEAD
 			<groupId>org.mnode.ical4j</groupId>
 			<artifactId>ical4j</artifactId>
 			<version>4.0.0-alpha6</version>
@@ -52,13 +51,16 @@
     			<artifactId>jsoup</artifactId>
     			<version>1.13.1</version>
   		</dependency>
-=======
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-math3</artifactId>
 			<version>3.6.1</version>
 		</dependency>
->>>>>>> a42c2d4... Added Math3 dependency and random method
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>29.0-jre</version>
+		</dependency>
 	</dependencies>
 
 	<build>
