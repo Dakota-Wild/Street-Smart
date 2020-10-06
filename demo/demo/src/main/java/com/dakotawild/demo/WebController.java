@@ -93,7 +93,6 @@ public class WebController {
   
   
         CurrencyUnit usd = CurrencyUnit.of("USD");
-        money = money.plus(Money.of(usd, 12.43d));
         money2 = money.minusMajor(2);
         money3 = money.multipliedBy(3.5d, RoundingMode.DOWN);
 

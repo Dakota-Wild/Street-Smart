@@ -15,11 +15,9 @@ class DemoApplicationTests {
 		DemoApplicationTests tester = new DemoApplicationTests();
 		exampleMoney = Money.parse("USD 58.23");
 		CurrencyUnit usd = CurrencyUnit.of("USD");
-		exampleMoney = exampleMoney.plus(Money.of(usd, 12.43d));
-		String result = exampleMoney.toString();
 		// Set up JMoney object with example methods
 
-		Assert.assertEquals("$70.46", tester.exampleMoney);
+		Assert.assertEquals("$58.23", tester.exampleMoney.toString());
 	}
 
 }
