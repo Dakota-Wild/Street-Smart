@@ -5,17 +5,21 @@ import org.junit.Assert;
 
 class DemoApplicationTests {
 
+	private Money exampleMoney;
 
 	void contextLoads() {
 	}
 
 	@Test
 	public void testJMoney(){
-		Money exampleMoney = Money.parse("USD 58.23");
+		DemoApplicationTests tester = new DemoApplicationTests();
+		exampleMoney = Money.parse("USD 58.23");
 		CurrencyUnit usd = CurrencyUnit.of("USD");
-		money = money.plus(Money.of(usd, 12.43d));
-		String result = money.toString();
-		Assert.assertEquals("$70.46", result);
+		exampleMoney = exampleMoney.plus(Money.of(usd, 12.43d));
+		String result = exampleMoney.toString();
+		// Set up JMoney object with example methods
+
+		Assert.assertEquals("$70.46", tester.exampleMoney);
 	}
 
 }
