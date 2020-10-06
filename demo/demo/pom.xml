@@ -42,9 +42,9 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>com.google.apis</groupId>
-			<artifactId>google-api-services-calendar</artifactId>
-			<version>v3-rev411-1.25.0</version>
+			<groupId>org.mnode.ical4j</groupId>
+			<artifactId>ical4j</artifactId>
+			<version>4.0.0-alpha6</version>
 		</dependency>
 		<dependency>
     			<groupId>org.jsoup</groupId>
