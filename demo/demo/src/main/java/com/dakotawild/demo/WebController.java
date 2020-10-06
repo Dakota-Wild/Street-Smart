@@ -1,6 +1,8 @@
 package com.dakotawild.demo;
 
 import java.io.IOException;
+import java.math.RoundingMode;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -9,12 +11,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.fortuna.ical4j.model.Calendar; 
-import net.fortuna.ical4j.model.component.VEvent; 
-import net.fortuna.ical4j.model.PropertyList; 
-import net.fortuna.ical4j.model.property.Uid; 
+// import jdk.internal.net.http.common.Utils;
+import net.fortuna.ical4j.model.Calendar;
+import net.fortuna.ical4j.model.component.VEvent;
+import net.fortuna.ical4j.model.PropertyList;
+import net.fortuna.ical4j.model.property.Uid;
 
-import org.joda.money;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Ordering;
+
+
+import java.util.*;
+import com.google.common.base.Objects;
+
+import org.joda.money.*;
 
 import org.apache.commons.math3.random.MersenneTwister;
 
@@ -32,20 +43,20 @@ public class WebController {
         
     }
     
-    @GetMapping("/ical4j") 
-    public Calendar myCalendar(){
-	    java.util.Calendar calendar = java.util.Calendar.getInstance(); 
-	    calendar.set(java.util.Calendar.MONTH, java.util.Calendar.JANUARY); 
-	    calendar.set(java.util.Calendar.DAY_OF_MONTH, 1); 
+    // @GetMapping("/ical4j") 
+    // public Calendar myCalendar(){
+	//     java.util.Calendar calendar = java.util.Calendar.getInstance(); 
+	//     calendar.set(java.util.Calendar.MONTH, java.util.Calendar.JANUARY); 
+	//     calendar.set(java.util.Calendar.DAY_OF_MONTH, 1); 
 	
-	    VEvent newYears = new VEvent(calendar.getTime(), "New Years"); 
-	    newYears.getProperties().add(Utils.generatedUid()); 
+	//     VEvent newYears = new VEvent(calendar.get(), "New Years"); 
+	//     newYears.getProperties().add(Utils.generatedUid()); 
 	    
-	    Calendar cal = new Calendar(); 
-	    cal.getComponents.add(newYears); 
+	//     Calendar cal = new Calendar(); 
+	//     cal.getComponents.add(newYears); 
 	    
-	    return cal; 
-    }
+	//     return cal; 
+    // }
 	
 	
     @GetMapping("/guava")
