@@ -21,3 +21,5 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+demo/demo/target/classes/com/dakotawild/demo/WebController.class
+demo/demo/target/test-classes/com/dakotawild
