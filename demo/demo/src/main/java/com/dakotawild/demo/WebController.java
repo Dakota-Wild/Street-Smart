@@ -12,26 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 // import jdk.internal.net.http.common.Utils;
-<<<<<<< HEAD:Street-Smart/demo/demo/src/main/java/com/dakotawild/demo/WebController.java
 import org.apache.commons.io.FilenameUtils; 
-
-=======
-import net.fortuna.ical4j.model.Calendar;
-import net.fortuna.ical4j.model.component.VEvent;
-import net.fortuna.ical4j.model.PropertyList;
-import net.fortuna.ical4j.model.property.Uid;
->>>>>>> a11e96b75677f45367239ea45819052703e52d7e:demo/demo/src/main/java/com/dakotawild/demo/WebController.java
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
-<<<<<<< HEAD:Street-Smart/demo/demo/src/main/java/com/dakotawild/demo/WebController.java
 
-
-=======
-
-
->>>>>>> a11e96b75677f45367239ea45819052703e52d7e:demo/demo/src/main/java/com/dakotawild/demo/WebController.java
 import java.util.*;
 import com.google.common.base.Objects;
 
@@ -53,28 +39,11 @@ public class WebController {
         
     }
     
-<<<<<<< HEAD:Street-Smart/demo/demo/src/main/java/com/dakotawild/demo/WebController.java
-    
     @GetMapping("/apache")
     public String apache(){
-        File file = FileUtils.getFile(getClass().getClassLoader().getResrouce("pom.xml").getPath())
+        //File file = FileUtils.getFile(getClass().getClassLoader().getResrouce("pom.xml").getPath()); 
+        return ""; 
     }
-=======
-    // @GetMapping("/ical4j") 
-    // public Calendar myCalendar(){
-	//     java.util.Calendar calendar = java.util.Calendar.getInstance(); 
-	//     calendar.set(java.util.Calendar.MONTH, java.util.Calendar.JANUARY); 
-	//     calendar.set(java.util.Calendar.DAY_OF_MONTH, 1); 
-	
-	//     VEvent newYears = new VEvent(calendar.get(), "New Years"); 
-	//     newYears.getProperties().add(Utils.generatedUid()); 
-	    
-	//     Calendar cal = new Calendar(); 
-	//     cal.getComponents.add(newYears); 
-	    
-	//     return cal; 
-    // }
->>>>>>> a11e96b75677f45367239ea45819052703e52d7e:demo/demo/src/main/java/com/dakotawild/demo/WebController.java
 
     
 	@GetMapping("/guava")

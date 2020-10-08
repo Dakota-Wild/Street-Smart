@@ -2,7 +2,7 @@ package com.dakotawild.demo;
 
 import java.io.IOException;
 
-import org.apache
+import org.apache; 
 
 public class ApacheTest {
     String EXPECTED_STRING = "On https://www.cpp.edu/index.shtml there are 88 different hyperlinks.";
