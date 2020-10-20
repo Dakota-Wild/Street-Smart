@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 @RestController
 public class HomeController {
+	@GetMapping(" ")
+	public String home() {
+		return "Dakota Wild Home Page";
+	}
 
 	@GetMapping("/Andrew_URL")
 	public String getURLandrew() {
