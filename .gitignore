@@ -2,6 +2,8 @@
 node_modules
 dist
 *.class
+*.prefs
+demo/demo/.settings
 
 # local env files
 .env.local
@@ -20,3 +22,5 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+*.project
+*.classpath
