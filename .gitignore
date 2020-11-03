@@ -4,6 +4,9 @@ dist
 *.class
 *.prefs
 demo/demo/.settings
+demo/demo/target/classes/com/dakotawild/demo
+demo/demo/target
+demo/demo/bin
 
 # local env files
 .env.local
@@ -22,5 +25,5 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
-*.project
-*.classpath
+.project
+.classpath
