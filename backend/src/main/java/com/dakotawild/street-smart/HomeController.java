@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 @RestController
 public class HomeController {
-	@GetMapping(" ")
+	@GetMapping("/home")
 	public String home() {
 		return "Dakota Wild Home Page";
 	}
