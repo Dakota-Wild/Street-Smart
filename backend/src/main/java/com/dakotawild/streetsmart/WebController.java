@@ -1,4 +1,4 @@
-package com.dakotawild.demo;
+package com.dakotawild.streetsmart;
 
 import java.io.IOException;
 import java.math.RoundingMode;
