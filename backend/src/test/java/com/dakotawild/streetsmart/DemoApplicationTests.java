@@ -1,4 +1,4 @@
-package com.dakotawild.demo;
+package com.dakotawild.streetsmart;
 
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;

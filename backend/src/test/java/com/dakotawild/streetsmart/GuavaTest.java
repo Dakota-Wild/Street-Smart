@@ -1,4 +1,4 @@
-package com.dakotawild.demo;
+package com.dakotawild.streetsmart;
 
 import org.junit.Assert;
 import org.junit.Test;

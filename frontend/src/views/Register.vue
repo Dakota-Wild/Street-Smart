@@ -19,7 +19,7 @@
                 </div>--->
                 <div class="card-body px-lg-5 py-lg-5">
                     <div class="text-center text-muted mb-4">
-                        <small>Or sign up with credentials</small>
+                        <small>Sign up below!</small>
                     </div>
                     <form role="form">
 
@@ -40,6 +40,11 @@
                                     type="password"
                                     addon-left-icon="ni ni-lock-circle-open"
                                     v-model="model.password">
+                        </base-input>
+
+                        <base-input class="input-group alternative"
+                                    placeholder="Confirm password"
+                                    addon-left-icon="ni ni-lock-circle-open">
                         </base-input>
 
                         <div class="text-muted font-italic">
@@ -75,7 +80,9 @@
     </div>
 </template>
 <script>
+import BaseInput from '../components/BaseInput.vue'
   export default {
+  components: { BaseInput },
     name: 'register',
     data() {
       return {
