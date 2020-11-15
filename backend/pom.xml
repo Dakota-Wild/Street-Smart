@@ -99,6 +99,12 @@
 										<include>favicon.ico</include>
                                     </includes>
                                 </resource>
+								<resource>
+									<directory>${project.parent.basedir}/frontend/public</directory>
+									<includes>
+                                        <include>img/</include>
+                                    </includes>
+								</resource>
                             </resources>
                         </configuration>
                     </execution>
