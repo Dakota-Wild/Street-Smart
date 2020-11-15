@@ -9,7 +9,7 @@
             <router-link class="navbar-brand" to="/">
                 <img :src="logo" class="navbar-brand-img" alt="...">
             </router-link>
-
+            <!---
             <slot name="mobile-right">
                 <ul class="nav align-items-center d-md-none">
                     <base-dropdown class="nav-item" position="right">
@@ -58,14 +58,14 @@
                         </a>
                     </base-dropdown>
                 </ul>
-            </slot>
-            <slot></slot>
+            </slot>--->
+            <!---<slot></slot>--->
             <div v-show="$sidebar.showSidebar" class="navbar-collapse collapse show" id="sidenav-collapse-main">
 
                 <div class="navbar-collapse-header d-md-none">
                     <div class="row">
                         <div class="col-6 collapse-brand">
-                            <router-link to="/">
+                            <router-link to="/schedule">
                                 <img :src="logo">
                             </router-link>
                         </div>

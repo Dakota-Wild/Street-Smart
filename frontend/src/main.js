@@ -20,9 +20,12 @@ import App from './App.vue'
 import router from './router'
 import './registerServiceWorker'
 import ArgonDashboard from './plugins/argon-dashboard'
+import VCalendar from 'v-calendar'
 
 Vue.config.productionTip = false
-
+Vue.use(VCalendar, {
+  componentPrefix: 'vc'
+});
 Vue.use(ArgonDashboard)
 new Vue({
   router,
