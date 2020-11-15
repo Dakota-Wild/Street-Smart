@@ -34,12 +34,12 @@ export default new Router({
           path: '/maps',
           name: 'maps',
           component: () => import(/* webpackChunkName: "demo" */ './views/Maps.vue')
-        },
+        }/*,
         {
           path: '/tables',
           name: 'tables',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Tables.vue')
-        }
+          component: () => import(/* webpackChunkName: "demo" *//* './views/Tables.vue')
+        }*/
       ]
     },
     {

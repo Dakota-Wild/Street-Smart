@@ -7,6 +7,7 @@
           <a href="https://www.binarcode.com" class="font-weight-bold ml-1" target="_blank">Binar Code</a>
         </div>
       </div>
+      <!---
       <div class="col-lg-6">
         <ul class="nav nav-footer justify-content-center justify-content-lg-end">
           <li class="nav-item">
@@ -23,6 +24,7 @@
           </li>
         </ul>
       </div>
+      --->
     </div>
   </footer>
 </template>
