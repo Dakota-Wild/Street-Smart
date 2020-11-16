@@ -14,4 +14,4 @@ To run the application locally:
     `java -jar backend/target/backend-0.0.1-SNAPSHOT.jar` **OR**  
     `java backend/src/main/com/dakotawild/street-smart/StreetSmart` **OR**  
     `mvn --projects backend spring-boot:run`
-4. Go to **localhost:8081** to see the web service.
+4. Go to **localhost:8080** to see the web service.
