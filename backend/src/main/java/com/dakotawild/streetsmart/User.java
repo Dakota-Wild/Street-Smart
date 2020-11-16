@@ -1,5 +1,6 @@
 package com.dakotawild.streetsmart;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="Users")
 public class User {
@@ -18,13 +19,13 @@ public class User {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
-    this.password = passsword;
+    this.password = password;
   }
 
   @Override
   public String toString() {
     return String.format(
         "User[id=%s, firstName='%s', lastName='%s', email='%s', password='%s']",
-        id, firstName, lastname, email, password);
+        id, firstName, lastName, email, password);
   }
 }
