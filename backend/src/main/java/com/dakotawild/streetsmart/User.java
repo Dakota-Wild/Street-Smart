@@ -6,22 +6,26 @@ public class User {
 
   @Id
   public String id;
-
-  public String firstName;
-  public String lastName;
+ 
+  public String userName;
+  public String password;
+  public String name;
+  public String email;
 
   public User() {}
 
-  public User(String firstName, String lastName) {
-    this.firstName = firstName;
-    this.lastName = lastName;
+  public User(String userName, String password, String name, String email) {
+    this.userName = userName;
+    this.password = passsword;
+    this.name = name;
+    this.email = email;
   }
 
   @Override
   public String toString() {
     return String.format(
-        "User[id=%s, firstName='%s', lastName='%s']",
-        id, firstName, lastName);
+        "User[id=%s, userName='%s', password='%s', name='%s', email='%s']",
+        userName, password, name, email);
   }
 
 }
