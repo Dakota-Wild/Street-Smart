@@ -44,6 +44,12 @@
                             <div class="text-center">
                                 <base-button type="primary" class="my-4">Sign in</base-button>
                             </div>
+                            <div id="test-get-all">
+                                <button v-on:click="getAllUsers">Get Users</button>
+                                <li v-for="user in users" v-bind:key="user.email">
+                                    {{ user.email }}
+                                </li>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -59,17 +65,34 @@
         </div>
 </template>
 <script>
+import http from "../http-common";
+
   export default {
     name: 'login',
     data() {
       return {
+        users: [],
         model: {
           email: '',
           password: ''
         }
-      }
+      };
+    },
+    methods: {
+        getAllUsers() {
+            http
+                .get("/users")
+                .then(response => {
+                    this.users = response.data;
+                    console.log(response.data);
+                })
+                .catch(e => {
+                    console.log(e)
+                });
+        }
     }
-  }
+}
+  
 </script>
 <style>
 </style>
