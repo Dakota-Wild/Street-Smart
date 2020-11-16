@@ -1,31 +1,31 @@
 package com.dakotawild.streetsmart;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-
+@Document(collection="Users")
 public class User {
 
   @Id
   public String id;
  
-  public String userName;
-  public String password;
-  public String name;
+  public String firstName;
+  public String lastName;
   public String email;
+  public String password;
 
   public User() {}
 
-  public User(String userName, String password, String name, String email) {
-    this.userName = userName;
-    this.password = passsword;
-    this.name = name;
+  public User(String firstName, String lastName, String email, String password) {
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.email = email;
+    this.password = password;
   }
 
   @Override
   public String toString() {
     return String.format(
-        "User[id=%s, userName='%s', password='%s', name='%s', email='%s']",
-        userName, password, name, email);
+        "User[id=%s, firstName='%s', lastName='%s', email='%s', password='%s']",
+        id, firstName, lastName, email, password);
   }
-
 }
