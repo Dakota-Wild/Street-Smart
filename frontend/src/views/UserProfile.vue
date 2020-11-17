@@ -27,43 +27,54 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <base-input alternative=""
-                                                        label="Username"
-                                                        placeholder="Username"
+                                                        label="First Name"
+                                                        placeholder="First Name"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.username"
+                                                        v-model="user.firstName"
+                                                        name="firstName"
                                             />
                                         </div>
                                         <div class="col-lg-6">
                                             <base-input alternative=""
-                                                        label="Email address"
-                                                        placeholder="jesse@example.com"
+                                                        label="Last Name"
+                                                        placeholder="Last Name"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.email"
+                                                        v-model="user.lastName"
+                                                        name="lastName"
                                             />
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <base-input alternative=""
-                                                        label="First name"
-                                                        placeholder="First name"
+                                                        label="Email"
+                                                        placeholder="example@example.com"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.firstName"
+                                                        v-model="user.email"
+                                                        name="email"
                                             />
                                         </div>
                                         <div class="col-lg-6">
                                             <base-input alternative=""
-                                                        label="Last name"
-                                                        placeholder="Last name"
+                                                        label="Password"
+                                                        placeholder="Password"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.lastName"
+                                                        v-model="user.password"
+                                                        name="password"
                                             />
                                         </div>
                                     </div>
+                                <div id="test-get-all">
+                                    <button v-on:click="getAllUsers">Get Users</button>
+                                        <li v-for="user in users" v-bind:key="user.email">
+                                            {{ user.email }}
+                                        </li>
+                                </div>
+                                <button v-on:click="saveUser" class="btn btn-success">Submit</button>
                                 </div>
                                 <hr class="my-4" />
                                 <!-- Address -->
-                                <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                                <h6 class="heading-small text-muted mb-4">Home Address</h6>
                                 <div class="pl-lg-4">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -111,22 +122,43 @@
     </div>
 </template>
 <script>
+import http from "../http-common";
   export default {
-    name: 'user-profile',
-    data() {
-      return {
-        model: {
-          username: '',
-          email: '',
-          firstName: '',
-          lastName: '',
-          address: '',
-          city: '',
-          country: '',
-          zipCode: '',
-        }
-      }
-    },
+    name: 'userProfile',
+        data() {
+                return {
+                    user: {
+                        id: '',
+                        firstName: '',
+                        lastName: '',
+                        email: '',
+                        password: ''
+                    }
+                }   
+        },
+    methods: {
+        saveUser() {
+            var data = {
+                firstName: this.user.firstName,
+                lastName: this.user.lastName,
+                email: this.user.email,
+                password: this.user.password
+            };
+            http
+                .post("/user", data)
+                .then(response => {
+                    this.user.id = response.data.id;
+                    console.log(response.data);
+                })
+                .catch(e => {
+                    console.log(e)
+                });
+        },
+        newUser() {
+            this.submitted = false;
+            this.user = {};
+        }   
+    }
   };
 </script>
 <style></style>

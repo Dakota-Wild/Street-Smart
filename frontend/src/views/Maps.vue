@@ -1,5 +1,15 @@
 <template>
   <div>
+    <body>
+      <div id="right-panel">
+        <div id="inputs"></div>
+        <div>
+          <strong>Results</strong>
+        </div>
+        <div id="output"></div>
+      </div>
+    </body>
+
     <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
     </base-header>
 
@@ -34,9 +44,19 @@
 export default {
   mounted() {
     let google = window.google;
+
+    const origin1 = { lat: 34.068921, lng: -118.4473698 }; //cpp
+    //const destinationA = { lat: 34.0589, lng: -117.8194 }; // ucla
+    const destinationIcon =
+      "https://chart.googleapis.com/chart?" +
+      "chst=d_map_pin_letter&chld=D|FF0000|000000";
+    const originIcon =
+      "https://chart.googleapis.com/chart?" +
+      "chst=d_map_pin_letter&chld=O|FFFF00|000000";
+
     const map = new google.maps.Map(document.getElementById("map-canvas"), {
-      center: { lat: -33.8688, lng: 151.2195 },
-      zoom: 13,
+      center: { lat: 34.0589, lng: -117.8194 },
+      zoom: 11,
       mapTypeId: "roadmap",
     });
     // Create the search box and link it to the UI element.
@@ -52,6 +72,73 @@ export default {
     // more details for that place.
     searchBox.addListener("places_changed", () => {
       const places = searchBox.getPlaces();
+      const geocoder = new google.maps.Geocoder();
+      const service = new google.maps.DistanceMatrixService();
+
+      service.getDistanceMatrix(
+        {
+          origins: [origin1],
+          destinations: [places[0].geometry.location],
+          travelMode: google.maps.TravelMode.DRIVING,
+          unitSystem: google.maps.UnitSystem.METRIC,
+          avoidHighways: false,
+          avoidTolls: false,
+        },
+        (response, status) => {
+          if (status !== "OK") {
+            alert("Error was: " + status);
+          } else {
+            const originList = response.originAddresses;
+            const destinationList = response.destinationAddresses;
+            const outputDiv = document.getElementById("output");
+            outputDiv.innerHTML = "";
+            deleteMarkers(markers);
+
+            const showGeocodedAddressOnMap = function(asDestination) {
+              const icon = asDestination ? destinationIcon : originIcon;
+
+              return function(results, status) {
+                if (status === "OK") {
+                  map.fitBounds(bounds.extend(results[0].geometry.location));
+                  markers.push(
+                    new google.maps.Marker({
+                      map,
+                      position: results[0].geometry.location,
+                      icon: icon,
+                    })
+                  );
+                } else {
+                  alert("Geocode was not successful due to: " + status);
+                }
+              };
+            };
+
+            for (let i = 0; i < originList.length; i++) {
+              const results = response.rows[i].elements;
+              geocoder.geocode(
+                { address: originList[i] },
+                showGeocodedAddressOnMap(false)
+              );
+
+              for (let j = 0; j < results.length; j++) {
+                geocoder.geocode(
+                  { address: destinationList[j] },
+                  showGeocodedAddressOnMap(true)
+                );
+                outputDiv.innerHTML +=
+                  originList[i] +
+                  " to " +
+                  destinationList[j] +
+                  ": " +
+                  results[j].distance.text +
+                  " in " +
+                  results[j].duration.text +
+                  "<br>";
+              }
+            }
+          }
+        }
+      );
 
       if (places.length == 0) {
         return;
@@ -96,6 +183,12 @@ export default {
     });
   },
 };
+function deleteMarkers(markersArray) {
+  for (let i = 0; i < markersArray.length; i++) {
+    markersArray[i].setMap(null);
+  }
+  markersArray = [];
+}
 </script>
 <style>
 #pac-input {
