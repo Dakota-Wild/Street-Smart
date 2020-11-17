@@ -22,52 +22,60 @@
                             </div>
                         </div>
                         <template>
-                            <form @submit.prevent>
-                                <div class="pl-lg-4">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <base-input alternative=""
-                                                        label="First Name"
-                                                        placeholder="First Name"
-                                                        input-classes="form-control-alternative"
-                                                        v-model="user.firstName"
-                                                        name="firstName"
-                                            />
+                            <div class="submitform">
+                                <div v-if="!submitted">
+                                    <form @submit.prevent>
+                                        <div class="pl-lg-4">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <base-input alternative=""
+                                                                label="First Name"
+                                                                placeholder="First Name"
+                                                                input-classes="form-control-alternative"
+                                                                v-model="user.firstName"
+                                                                name="firstName"
+                                                    />
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <base-input alternative=""
+                                                                label="Last Name"
+                                                                placeholder="Last Name"
+                                                                input-classes="form-control-alternative"
+                                                                v-model="user.lastName"
+                                                                name="lastName"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <base-input alternative=""
+                                                                label="Email"
+                                                                placeholder="example@example.com"
+                                                                input-classes="form-control-alternative"
+                                                                v-model="user.email"
+                                                                name="email"
+                                                    />
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <base-input alternative=""
+                                                                label="Password"
+                                                                placeholder="Password"
+                                                                input-classes="form-control-alternative"
+                                                                v-model="user.password"
+                                                                name="password"
+                                                    />
+                                                </div>
+                                            </div>
+                                        <button v-on:click="saveUser" class="btn btn-success">Submit</button>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <base-input alternative=""
-                                                        label="Last Name"
-                                                        placeholder="Last Name"
-                                                        input-classes="form-control-alternative"
-                                                        v-model="user.lastName"
-                                                        name="lastName"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <base-input alternative=""
-                                                        label="Email"
-                                                        placeholder="example@example.com"
-                                                        input-classes="form-control-alternative"
-                                                        v-model="user.email"
-                                                        name="email"
-                                            />
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <base-input alternative=""
-                                                        label="Password"
-                                                        placeholder="Password"
-                                                        input-classes="form-control-alternative"
-                                                        v-model="user.password"
-                                                        name="password"
-                                            />
-                                        </div>
-                                    </div>
-                                <button v-on:click="saveUser" class="btn btn-success">Submit</button>
+                                    </form>
+                                </div>
+                                <div v-else>
+                                <h4>You submitted successfully!</h4>
+                                    <button class="btn btn-success" v-on:click="newUser">Add</button>
                                 </div>
                                 <hr class="my-4" />
-                            </form>
+                            </div>
                         </template>
                     </card>
                 </div>
@@ -87,8 +95,9 @@ import http from "../http-common";
                         lastName: '',
                         email: '',
                         password: ''
-                    }
-                }   
+                    },
+                    submitted:false
+                };   
         },
     methods: {
         saveUser() {
@@ -107,6 +116,7 @@ import http from "../http-common";
                 .catch(e => {
                     console.log(e)
                 });
+            this.submitted = true;
         },
         newUser() {
             this.submitted = false;
