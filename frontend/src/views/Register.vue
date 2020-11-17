@@ -41,7 +41,9 @@
                         </base-input>
 
                         <div class="text-center">
-                            <base-button v-on:click="saveUser" type="primary" class="my-4">Create account</base-button>
+                            <router-link to="/login" class="text-light">
+                                <base-button v-on:click="saveUser" type="primary" class="my-4">Create account</base-button>
+                            </router-link>
                         </div>
                     </form>
                 </div>
