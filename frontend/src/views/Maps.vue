@@ -46,7 +46,7 @@ export default {
     let google = window.google;
 
     const origin1 = { lat: 34.068921, lng: -118.4473698 }; //cpp
-    const destinationA = { lat: 34.0589, lng: -117.8194 }; // ucla
+    //const destinationA = { lat: 34.0589, lng: -117.8194 }; // ucla
     const destinationIcon =
       "https://chart.googleapis.com/chart?" +
       "chst=d_map_pin_letter&chld=D|FF0000|000000";
@@ -78,7 +78,7 @@ export default {
       service.getDistanceMatrix(
         {
           origins: [origin1],
-          destinations: [destinationA],
+          destinations: [places[0].geometry.location],
           travelMode: google.maps.TravelMode.DRIVING,
           unitSystem: google.maps.UnitSystem.METRIC,
           avoidHighways: false,
@@ -94,10 +94,10 @@ export default {
             outputDiv.innerHTML = "";
             deleteMarkers(markers);
 
-            const showGeocodedAddressOnMap = function (asDestination) {
+            const showGeocodedAddressOnMap = function(asDestination) {
               const icon = asDestination ? destinationIcon : originIcon;
 
-              return function (results, status) {
+              return function(results, status) {
                 if (status === "OK") {
                   map.fitBounds(bounds.extend(results[0].geometry.location));
                   markers.push(
