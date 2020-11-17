@@ -44,12 +44,6 @@
                             <div class="text-center">
                                 <base-button type="primary" class="my-4">Sign in</base-button>
                             </div>
-                            <div id="test-get-all">
-                                <button v-on:click="getAllUsers">Get Users</button>
-                                <li v-for="user in users" v-bind:key="user.email">
-                                    {{ user.email }}
-                                </li>
-                            </div>
                         </form>
                     </div>
                 </div>
