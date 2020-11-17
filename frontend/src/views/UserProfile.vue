@@ -64,55 +64,9 @@
                                             />
                                         </div>
                                     </div>
-                                <div id="test-get-all">
-                                    <button v-on:click="getAllUsers">Get Users</button>
-                                        <li v-for="user in users" v-bind:key="user.email">
-                                            {{ user.email }}
-                                        </li>
-                                </div>
                                 <button v-on:click="saveUser" class="btn btn-success">Submit</button>
                                 </div>
                                 <hr class="my-4" />
-                                <!-- Address -->
-                                <h6 class="heading-small text-muted mb-4">Home Address</h6>
-                                <div class="pl-lg-4">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <base-input alternative=""
-                                                        label="Address"
-                                                        placeholder="Home Address"
-                                                        input-classes="form-control-alternative"
-                                                        v-model="model.address"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <base-input alternative=""
-                                                        label="City"
-                                                        placeholder="City"
-                                                        input-classes="form-control-alternative"
-                                                        v-model="model.city"
-                                            />
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <base-input alternative=""
-                                                        label="Country"
-                                                        placeholder="Country"
-                                                        input-classes="form-control-alternative"
-                                                        v-model="model.country"
-                                            />
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <base-input alternative=""
-                                                        label="Postal code"
-                                                        placeholder="Postal code"
-                                                        input-classes="form-control-alternative"
-                                                        v-model="model.zipCode"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
                             </form>
                         </template>
                     </card>
@@ -124,7 +78,7 @@
 <script>
 import http from "../http-common";
   export default {
-    name: 'userProfile',
+    name: 'user-profile',
         data() {
                 return {
                     user: {
