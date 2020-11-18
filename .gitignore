@@ -12,6 +12,7 @@ frontend/node
 frontend/target
 backend/target
 backend/src/main/resources/public
+node_modules
 /dist
 .settings
 .project
