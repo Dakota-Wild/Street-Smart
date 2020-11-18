@@ -1,16 +1,17 @@
 <template>
   <div>
-    <body>
-      <div id="right-panel">
+    
+
+    <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
+    <body id="results-container">
+      <div class="results">
         <div id="inputs"></div>
-        <div>
+        <div class="results">
           <strong>Results</strong>
         </div>
         <div id="output"></div>
       </div>
     </body>
-
-    <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
     </base-header>
 
     <body>
@@ -200,5 +201,26 @@ function deleteMarkers(markersArray) {
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
   width: 600px;
+}
+#output {
+  background-color: transparent;
+}
+
+.results {
+  color: white;
+  background: transparent;
+  width: 100%;
+}
+
+#inputs {
+  background-color: transparent;
+}
+
+#results-container {
+  background-color: transparent;
+}
+
+strong {
+  background-color: transparent;
 }
 </style>
