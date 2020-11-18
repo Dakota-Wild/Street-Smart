@@ -1,6 +1,8 @@
 package com.dakotawild.streetsmart;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.List;
+import java.util.ArrayList;
 
 @Document(collection="Users")
 public class User {
@@ -12,14 +14,14 @@ public class User {
   private String lastName;
   private String email;
   private String password;
-
-  public User() {}
+  private List<Schedule> schedule;
 
   public User(String firstName, String lastName, String email, String password) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.password = password;
+    schedule = new ArrayList<Schedule>();
   }
 
   @Override
