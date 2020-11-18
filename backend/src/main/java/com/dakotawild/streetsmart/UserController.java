@@ -1,8 +1,5 @@
 package com.dakotawild.streetsmart;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,27 +14,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class UserController {
 
     @Autowired
-    private UserRepository repository;
-    
-    @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
-    @GetMapping("/users")
-    public List<User> getAllUsers() {
-        List<User> users = new ArrayList<User>();
-        try {
-            users = userRepository.findAll();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return users;
-    }
+    @Autowired
+    private ScheduleRepository scheduleRepository;
+
+    // @GetMapping("/users")
+    // public List<User> getAllUsers() {
+    //     List<User> users = new ArrayList<User>();
+    //     try {
+    //         users = testrepo.findAll();
+    //     } catch (Exception e) {
+    //         System.out.println(e.getMessage());
+    //     }
+    //     return users;
+    // }
 
     @PostMapping("/user")
     public User postUser(@RequestBody User user) {
  
-      User _user = repository.save(new User(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword()));
+      User _user = userRepository.save(new User(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword()));
       return _user;
     }
 
+    @PostMapping("/schedule")
+    public Schedule postSchedule(@RequestBody Schedule schedule){
+        Schedule _schedule = scheduleRepository.save(new Schedule(schedule.getEventName(), schedule.getEventStartTime(),schedule.getEventEndTime(),
+                                                        schedule.getEventArrivalTime(), schedule.getEventAddress(), schedule.getEventEmail()));
+        return _schedule;
+    }
 }

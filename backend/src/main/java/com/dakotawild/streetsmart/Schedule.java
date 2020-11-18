@@ -71,11 +71,11 @@ public class Schedule {
         this.address = address;
     }
 
-    public String getUserEmail(){
+    public String getEventEmail(){
         return this.userEmail;
     }
 
-    public void setUserEmail(String userEmail){
+    public void setEventEmail(String userEmail){
         this.userEmail = userEmail;
     }
 }
