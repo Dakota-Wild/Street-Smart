@@ -51,9 +51,9 @@
             <div class="row mt-3">
                 <div class="col-6">
                 </div>
-                <div class="col-6 text-right">
+                <div class="col-12 text-right">
                     <router-link to="/login" class="text-light">
-                        <small>Login into your account</small>
+                        <small>Already have an account? Log in here</small>
                     </router-link>
                 </div>
             </div>

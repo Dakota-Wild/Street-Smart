@@ -7,8 +7,9 @@
                 <div class="header-body text-center mb-7">
                     <div class="row justify-content-center">
                         <div class="col-lg-5 col-md-6">
-                            <h1 class="text-white">Welcome!</h1>
-                            <p class="text-lead text-white">Create a new Street Smart account</p>
+                            <h1 class="text-white">Welcome to</h1>
+                            <h1 id="title" class="text-white">StreetSmart</h1>
+                            <p class="text-lead text-white">All of your commuter needs: satisfied.</p>
                         </div>
                     </div>
                 </div>
@@ -35,26 +36,6 @@
                                                target="_blank">Creative Tim</a>
                         </div>
                     </div>
-                    <!---
-                    <div class="col-xl-6">
-                        <ul class="nav nav-footer justify-content-center justify-content-xl-end">
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About
-                                    Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md"
-                                   class="nav-link" target="_blank">MIT License</a>
-                            </li>
-                        </ul>
-                    </div>
-                    --->
                 </div>
             </div>
         </footer>
@@ -76,5 +57,12 @@
     }
   }
 </script>
-<style>
+<style scoped>
+#title {
+    font-size: 80px;
+    text-align: center;
+    margin:0 auto;
+    margin-left: auto;
+    margin-right: auto;
+}
 </style>
