@@ -14,21 +14,21 @@ public class User {
   private String lastName;
   private String email;
   private String password;
-  private List<Schedule> schedule;
+  private String homeAddress;
 
-  public User(String firstName, String lastName, String email, String password) {
+  public User(String firstName, String lastName, String email, String password, String homeAddress) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.password = password;
-    schedule = new ArrayList<Schedule>();
+    this.homeAddress = homeAddress;
   }
 
   @Override
   public String toString() {
     return String.format(
-        "User[id=%s, firstName='%s', lastName='%s', email='%s', password='%s']",
-        id, firstName, lastName, email, password);
+        "User[id=%s, firstName='%s', lastName='%s', email='%s', password='%s', homeAddress='%s']",
+        id, firstName, lastName, email, password, homeAddress);
   }
   
   public String getFirstName(){
@@ -61,5 +61,13 @@ public class User {
 
   public void setPassword(String password){
     this.password = password;
+  }
+
+  public String getHomeAddress(){
+    return this.homeAddress;
+  }
+
+  public void setHomeAddress(String homeAddress){
+    this.homeAddress = homeAddress;
   }
 }

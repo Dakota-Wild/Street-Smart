@@ -33,7 +33,7 @@ public class UserController {
     @PostMapping("/user")
     public User postUser(@RequestBody User user) {
  
-      User _user = userRepository.save(new User(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword()));
+      User _user = userRepository.save(new User(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.getHomeAddress()));
       return _user;
     }
 

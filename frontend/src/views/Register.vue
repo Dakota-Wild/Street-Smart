@@ -28,6 +28,12 @@
                         </base-input>
 
                         <base-input class="input-group alternative"
+                                    placeholder="Home Address"
+                                    addon-left-icon="ni ni-lock-circle-open"
+                                    v-model="user.homeAddress">
+                        </base-input>
+
+                        <base-input class="input-group alternative"
                                     placeholder="Password"
                                     type="password"
                                     addon-left-icon="ni ni-lock-circle-open"
@@ -73,6 +79,7 @@ import http from "../http-common";
                     firstName: '',
                     lastName: '',
                     email: '',
+                    homeAddress: '',
                     password: ''
                 }
             }   
@@ -83,6 +90,7 @@ import http from "../http-common";
                 firstName: this.user.firstName,
                 lastName: this.user.lastName,
                 email: this.user.email,
+                homeAddress: this.user.homeAddress,
                 password: this.user.password
             };
             http
