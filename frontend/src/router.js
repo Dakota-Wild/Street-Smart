@@ -56,6 +56,11 @@ export default new Router({
           path: '/schedule',
           name: 'schedule',
           component: () => import ('./views/Schedule.vue')
+        },
+        {
+          path: '/createevent',
+          name: 'createEvent',
+          component: () => import ('./views/CreateEvent.vue')
         }
       ]
     }

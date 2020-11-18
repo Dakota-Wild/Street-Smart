@@ -6,9 +6,34 @@
       title="Argon"
     >
       <template slot="links">
-        <sidebar-item :link="{name: 'Schedule', icon: 'ni ni-calendar-grid-58', path: '/schedule'}"/>
-        <sidebar-item :link="{name: 'Maps', icon: 'ni ni-pin-3 text-orange', path: '/maps'}"/>
-        <sidebar-item :link="{name: 'User Profile', icon: 'ni ni-single-02 text-yellow', path: '/profile'}"/>
+        <sidebar-item
+          :link="{
+            name: 'Schedule',
+            icon: 'ni ni-calendar-grid-58',
+            path: '/schedule',
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'CreateEvent',
+            icon: 'ni ni-calendar-grid-58',
+            path: '/createevent',
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'Maps',
+            icon: 'ni ni-pin-3 text-orange',
+            path: '/maps',
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'User Profile',
+            icon: 'ni ni-single-02 text-yellow',
+            path: '/profile',
+          }"
+        />
       </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
@@ -25,29 +50,28 @@
   </div>
 </template>
 <script>
-  import DashboardNavbar from './DashboardNavbar.vue';
-  import ContentFooter from './ContentFooter.vue';
-  import { FadeTransition } from 'vue2-transitions';
+import DashboardNavbar from "./DashboardNavbar.vue";
+import ContentFooter from "./ContentFooter.vue";
+import { FadeTransition } from "vue2-transitions";
 
-  export default {
-    components: {
-      DashboardNavbar,
-      ContentFooter,
-      FadeTransition
-    },
-    data() {
-      return {
-        sidebarBackground: 'vue' //vue|blue|orange|green|red|primary
-      };
-    },
-    methods: {
-      toggleSidebar() {
-        if (this.$sidebar.showSidebar) {
-          this.$sidebar.displaySidebar(false);
-        }
+export default {
+  components: {
+    DashboardNavbar,
+    ContentFooter,
+    FadeTransition,
+  },
+  data() {
+    return {
+      sidebarBackground: "vue", //vue|blue|orange|green|red|primary
+    };
+  },
+  methods: {
+    toggleSidebar() {
+      if (this.$sidebar.showSidebar) {
+        this.$sidebar.displaySidebar(false);
       }
-    }
-  };
+    },
+  },
+};
 </script>
-<style lang="scss">
-</style>
+<style lang="scss"></style>
