@@ -22,11 +22,14 @@ import './registerServiceWorker'
 import ArgonDashboard from './plugins/argon-dashboard'
 import VCalendar from 'v-calendar'
 
+
+
 Vue.config.productionTip = false
 Vue.use(VCalendar, {
   componentPrefix: 'vc'
 });
 Vue.use(ArgonDashboard)
+
 new Vue({
   router,
   render: h => h(App)
