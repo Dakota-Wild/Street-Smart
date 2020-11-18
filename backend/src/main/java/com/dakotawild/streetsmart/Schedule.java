@@ -10,15 +10,15 @@ public class Schedule {
 
     private String eventName;
     private String eventStartTime;
-    private String eventEndTime;
+    private String eventDate;
     private String arrivalTime;
     private String address;
     private String userEmail;
 
-    public Schedule(String eventName, String eventStartTime, String eventEndTime, String arrivalTime, String address, String userEmail){
+    public Schedule(String eventName, String eventStartTime, String eventDate, String arrivalTime, String address, String userEmail){
         this.eventName = eventName;
         this.eventStartTime = eventStartTime;
-        this.eventEndTime = eventEndTime;
+        this.eventDate = eventDate;
         this.arrivalTime = arrivalTime;
         this.address = address;
         this.userEmail = userEmail;
@@ -27,8 +27,8 @@ public class Schedule {
     @Override
     public String toString() {
       return String.format(
-          "Schedule[id=%s, eventName='%s', eventStartTime='%s', eventEndTime='%s', arrivalTime='%s', address='%s', userEmail='%s']",
-          id, eventName, eventStartTime, eventEndTime, arrivalTime, address, userEmail);
+          "Schedule[id=%s, eventName='%s', eventStartTime='%s', eventDate='%s', arrivalTime='%s', address='%s', userEmail='%s']",
+          id, eventName, eventStartTime, eventDate, arrivalTime, address, userEmail);
     }
 
     public String getEventName(){
@@ -47,12 +47,13 @@ public class Schedule {
         this.eventStartTime = eventStartTime;
     }
 
-    public String getEventEndTime(){
-        return this.eventEndTime;
+
+    public String getEventDate(){
+        return this.eventDate;
     }
 
-    public void setEventEndTime(String eventEndTime){
-        this.eventEndTime = eventEndTime;
+    public void setEventDate(String eventDate){
+        this.eventDate = eventDate;
     }
 
     public String getEventArrivalTime(){

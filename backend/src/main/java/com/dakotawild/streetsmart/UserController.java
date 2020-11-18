@@ -39,7 +39,7 @@ public class UserController {
 
     @PostMapping("/schedule")
     public Schedule postSchedule(@RequestBody Schedule schedule){
-        Schedule _schedule = scheduleRepository.save(new Schedule(schedule.getEventName(), schedule.getEventStartTime(),schedule.getEventEndTime(),
+        Schedule _schedule = scheduleRepository.save(new Schedule(schedule.getEventName(), schedule.getEventStartTime(),schedule.getEventDate(),
                                                         schedule.getEventArrivalTime(), schedule.getEventAddress(), schedule.getEventEmail()));
         return _schedule;
     }
