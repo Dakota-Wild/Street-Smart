@@ -54,6 +54,17 @@
                                                         name="email"
                                             />
                                         </div>
+                                       <div class="col-lg-6">
+                                            <base-input alternative=""
+                                                        label="Home Address"
+                                                        placeholder="FE: 3801 W Temple Ave, Pomona, CA 91768"
+                                                        input-classes="form-control-alternative"
+                                                        v-model="user.homeAddress"
+                                                        name="homeAddress"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-lg-6">
                                             <base-input alternative=""
                                                         label="Password"
@@ -87,6 +98,7 @@ import http from "../http-common";
                         firstName: '',
                         lastName: '',
                         email: '',
+                        homeAddress: '',
                         password: ''
                     }
                 }   
@@ -97,6 +109,7 @@ import http from "../http-common";
                 firstName: this.user.firstName,
                 lastName: this.user.lastName,
                 email: this.user.email,
+                homeAddress: this.user.homeAddress,
                 password: this.user.password
             };
             http
