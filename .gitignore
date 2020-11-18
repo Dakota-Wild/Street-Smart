@@ -16,6 +16,7 @@ backend/src/main/resources/public
 .settings
 .project
 .classpath
+.class
 
 # local env files
 .env.local
