@@ -30,6 +30,7 @@ Vue.use(VCalendar, {
 });
 Vue.use(ArgonDashboard)
 
+
 new Vue({
   router,
   render: h => h(App)

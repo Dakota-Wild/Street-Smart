@@ -23,8 +23,10 @@
     "vue": "2.6.11",
     "vue-chartjs": "3.5.0",
     "vue-clipboard2": "0.3.1",
+    "vue-date-pick": "^1.4.1",
     "vue-flatpickr-component": "8.1.5",
     "vue-router": "3.3.4",
+    "vue2-timepicker": "^1.1.5",
     "vue2-transitions": "0.3.0"
   },
   "devDependencies": {
