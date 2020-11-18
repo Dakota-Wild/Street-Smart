@@ -26,13 +26,38 @@
           </div>
         </template>
       </vc-calendar>
-      <button type="button">Add New Event</button>
+      <Button
+        @click="openSignIn"
+        v-tooltip.bottom="'Cannot be closed by clicking outside'"
+      >
+        Add New Event
+      </Button>
     </div>
+    <ModalRoot />
   </div>
 </template>
 
 <script>
+import { ModalBus } from "./eventBus";
+import Button from "../components/Button";
+import ModalRoot from "../components/ModalRoot";
+import SignInForm from "../components/SignInForm";
+
 export default {
+  name: "app",
+  components: {
+    Button,
+    ModalRoot,
+  },
+  methods: {
+    openSignIn() {
+      ModalBus.$emit("open", {
+        component: SignInForm,
+        title: "New user",
+        closeOnClick: false,
+      });
+    },
+  },
   data() {
     const month = new Date().getMonth();
     const year = new Date().getFullYear();
