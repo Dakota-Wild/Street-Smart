@@ -150,20 +150,23 @@ export default {
     autocomplete.setFields(["address_component"]);
     // When the user selects an address from the drop-down, populate the
     // address fields in the form.
-    autocomplete.addListener("place_changed", fillInAddress(componentForm, autocomplete));
+    autocomplete.addListener(
+      "place_changed",
+      fillInAddress(componentForm, autocomplete)
+    );
   },
 
-    //   autocomplete.addListener("place_changed", () => {
-      
-    // });
+  //   autocomplete.addListener("place_changed", () => {
+
+  // });
 
   methods: {
     saveSchedule() {
-      
+      this.schedule.address = document.getElementById("addressInput").value;
       //upon saveSchedule calculate the time to leave by
-      const origin = { lat: 34.0589, lng: -117.8194 } // cpp by default
-      const destination = { lat: 34.068921, lng: -118.4473698 } //ucla by default
-      let google = window.google
+      const origin = { lat: 34.0589, lng: -117.8194 }; // cpp by default
+      const destination = { lat: 34.068921, lng: -118.4473698 }; //ucla by default
+      let google = window.google;
       // const geocoder = new google.maps.Geocoder();
       const service = new google.maps.DistanceMatrixService();
       var tempTime;
@@ -183,17 +186,16 @@ export default {
           } else {
             const results = response.rows[0].elements;
 
-              tempTime = results[0].duration.value;
-              console.log("leaveBy from the function: " + tempTime); 
-              this.schedule.leaveByTime = tempTime;
+            tempTime = results[0].duration.value;
+            console.log("leaveBy from the function: " + tempTime);
+            this.schedule.leaveByTime = tempTime;
           }
         }
-      )
+      );
       var timeInSeconds = 2990; //for testing purposes only
-      console.log(timeInSeconds / 60)
+      console.log(timeInSeconds / 60);
       var tempArrivalTime = this.schedule.arrivalTime;
-      console.log(tempArrivalTime.substring(0,2));
-      
+      console.log(tempArrivalTime.substring(0, 2));
 
       //end of calculations
 
@@ -238,7 +240,6 @@ function fillInAddress(componentForm, autocomplete) {
       document.getElementById(addressType).value = val;
     }
   }
-  this.schedule.address = document.getElementById("addressInput").value;
 }
 </script>
 <style></style>
