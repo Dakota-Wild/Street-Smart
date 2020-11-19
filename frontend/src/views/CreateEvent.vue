@@ -117,7 +117,6 @@ export default {
   name: "create-event",
   components: { VueTimepicker, DatePick },
   data() {
-    console.log(this.email + "we good");
     return {
       schedule: {
         id: "",
@@ -126,7 +125,7 @@ export default {
         eventDate: "",
         arrivalTime: "",
         address: "",
-        userEmail: this.email,
+        userEmail: this.$store.state.email,
       },
       submitted: false,
     };

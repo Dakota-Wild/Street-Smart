@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    email: "test"
+    email: ""
   },
   getters: {
     getEmail: state => {

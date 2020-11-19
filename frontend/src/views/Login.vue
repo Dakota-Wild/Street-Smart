@@ -61,10 +61,9 @@ import router from "../router";
                     }
                     else {
                         router.push('/dashboard');
-                        console.log(this.$store.state.email);
-                        console.log(this.$store.getters.getEmail);
-                        this.$store.commit('change', 'blah2');
-                        console.log(this.$store.state.email);
+                        console.log("Before: " + this.$store.state.email);
+                        this.$store.commit('change', response.data.email);
+                        console.log("After: " + this.$store.state.email);
                     }
                 })
                 .catch(e => {

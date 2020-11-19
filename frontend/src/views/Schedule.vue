@@ -6,7 +6,6 @@ export default {
   data() {
     const month = new Date().getMonth();
     const year = new Date().getFullYear();
-    console.log(this.email);
     return {
       masks: {
         weekdays: "WWW",
