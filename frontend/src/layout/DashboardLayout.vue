@@ -8,6 +8,13 @@
       <template slot="links">
         <sidebar-item
           :link="{
+            name: 'Dashboard',
+            icon: 'ni ni-calendar-grid-58',
+            path: '/dashboard',
+          }"
+        />
+        <sidebar-item
+          :link="{
             name: 'Schedule',
             icon: 'ni ni-calendar-grid-58',
             path: '/schedule',
