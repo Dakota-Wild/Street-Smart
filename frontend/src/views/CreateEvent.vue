@@ -122,13 +122,21 @@ export default {
         arrivalTime: "",
         address: "",
         userEmail: "",
+        leaveByTime: "Jjjjjj",
       },
       submitted: false,
     };
   },
 
   mounted() {
-    // let placeSearch;
+    const componentForm = {
+      street_number: "short_name",
+      route: "long_name",
+      locality: "long_name",
+      administrative_area_level_1: "short_name",
+      country: "long_name",
+      postal_code: "short_name",
+    };
 
     let google = window.google;
     // Create the autocomplete object, restricting the search predictions to
@@ -142,13 +150,53 @@ export default {
     autocomplete.setFields(["address_component"]);
     // When the user selects an address from the drop-down, populate the
     // address fields in the form.
-    autocomplete.addListener("place_changed", () => {
-      this.schedule.address = document.getElementById("addressInput").value;
-    });
+    autocomplete.addListener("place_changed", fillInAddress(componentForm, autocomplete));
   },
+
+    //   autocomplete.addListener("place_changed", () => {
+      
+    // });
 
   methods: {
     saveSchedule() {
+      
+      //upon saveSchedule calculate the time to leave by
+      const origin = { lat: 34.0589, lng: -117.8194 } // cpp by default
+      const destination = { lat: 34.068921, lng: -118.4473698 } //ucla by default
+      let google = window.google
+      // const geocoder = new google.maps.Geocoder();
+      const service = new google.maps.DistanceMatrixService();
+      var tempTime;
+
+      service.getDistanceMatrix(
+        {
+          origins: [origin],
+          destinations: [destination],
+          travelMode: google.maps.TravelMode.DRIVING,
+          unitSystem: google.maps.UnitSystem.IMPERIAL,
+          avoidHighways: false,
+          avoidTolls: false,
+        },
+        (response, status) => {
+          if (status !== "OK") {
+            alert("Error was: " + status);
+          } else {
+            const results = response.rows[0].elements;
+
+              tempTime = results[0].duration.value;
+              console.log("leaveBy from the function: " + tempTime); 
+              this.schedule.leaveByTime = tempTime;
+          }
+        }
+      )
+      var timeInSeconds = 2990; //for testing purposes only
+      console.log(timeInSeconds / 60)
+      var tempArrivalTime = this.schedule.arrivalTime;
+      console.log(tempArrivalTime.substring(0,2));
+      
+
+      //end of calculations
+
       var data = {
         eventName: this.schedule.eventName,
         eventStartTime: this.schedule.eventStartTime,
@@ -174,5 +222,23 @@ export default {
     },
   },
 };
+function fillInAddress(componentForm, autocomplete) {
+  // Get the place details from the autocomplete object.
+  const place = autocomplete.getPlace();
+  for (const component in componentForm) {
+    document.getElementById(component).value = "";
+    document.getElementById(component).disabled = false;
+  }
+  // Get each component of the address from the place details,
+  // and then fill-in the corresponding field on the form.
+  for (const component of place.address_components) {
+    const addressType = component.types[0];
+    if (componentForm[addressType]) {
+      const val = component[componentForm[addressType]];
+      document.getElementById(addressType).value = val;
+    }
+  }
+  this.schedule.address = document.getElementById("addressInput").value;
+}
 </script>
 <style></style>
