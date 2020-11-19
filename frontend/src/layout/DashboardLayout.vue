@@ -9,21 +9,21 @@
         <sidebar-item
           :link="{
             name: 'Dashboard',
-            icon: 'ni ni-calendar-grid-58',
+            icon: 'ni ni-tablet-button text-green',
             path: '/dashboard',
           }"
         />
         <sidebar-item
           :link="{
             name: 'Schedule',
-            icon: 'ni ni-calendar-grid-58',
+            icon: 'ni ni-calendar-grid-58 text-red',
             path: '/schedule',
           }"
         />
         <sidebar-item
           :link="{
             name: 'Create Event',
-            icon: 'ni ni-calendar-grid-58',
+            icon: 'ni ni-zoom-split-in text-green',
             path: '/createevent',
           }"
         />
