@@ -23,7 +23,7 @@
         <sidebar-item
           :link="{
             name: 'Create Event',
-            icon: 'ni ni-zoom-split-in text-green',
+            icon: 'ni ni-fat-add text-blue',
             path: '/createevent',
           }"
         />
