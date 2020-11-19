@@ -1,28 +1,26 @@
 <template>
     <div>
-          
-          <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">            
-            <div>
-              <schedule/>
-            </div>
-          </base-header>
-            <div class="container-fluid mt--7">
-              <maps/>
-            </div>
+      <base-header type="gradient-success" class="pt-md-8">            
+        <card shadow type="secondary">
+          <div slot="header">
+            Upcoming events
+          </div>
+          <div class="event">
+            You have no scheduled events
+          </div>
+        </card>
+      </base-header>
 
-        
-       
-        
-
+      <div >
+        <maps/>
+      </div>
     </div>
 </template>
 <script>
-  import Schedule from './Schedule.vue';
   import Maps from './Maps';
 
   export default {
     components: {
-      Schedule,
       Maps,
     },
     data() {
@@ -34,4 +32,8 @@
     },
   };
 </script>
-<style></style>
+<style scoped>
+.event {
+  color: gray;
+}
+</style>
