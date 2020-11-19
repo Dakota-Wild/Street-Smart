@@ -51,26 +51,6 @@
                   </div>
                   <div class="row">
                     <div class="col-lg-6">
-                      <base-input
-                        alternative=""
-                        label="Email"
-                        placeholder="example@example.com"
-                        input-classes="form-control-alternative"
-                        v-model="schedule.email"
-                        name="email"
-                      />
-                    </div>
-                    <div class="col-lg-6">
-                      <label>Event Date</label>
-                      <br />
-                      <date-pick
-                        v-model="schedule.eventDate"
-                        :displayFormat="'DD.MM.YYYY'"
-                      ></date-pick>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
                       <label>Event Start Time</label>
                       <br />
                       <vue-timepicker
@@ -85,6 +65,17 @@
                         v-model="schedule.arrivalTime"
                         format="hh:mm a"
                       ></vue-timepicker>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <br />
+                      <label>Event Date</label>
+                      <br />
+                      <date-pick
+                        v-model="schedule.eventDate"
+                        :displayFormat="'DD.MM.YYYY'"
+                      ></date-pick>
                     </div>
                   </div>
                   <div class="row"></div>
