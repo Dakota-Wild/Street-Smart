@@ -49,20 +49,13 @@ import http from "../http-common";
     },
     methods: {
         checkValidLogin() {
-            var data = {
-                id: this.user.id,
-                firstName: this.user.firstName,
-                lastName: this.user.lastName,
-                email: this.user.email,
-                homeAddress: this.user.homeAddress,
-                password: this.user.password
-            };
             http
-                .get("/login-check", data)
+                .get("/login-check/"+ this.user.email +"/" + this.user.password)
                 .then(response => {
-                    this.user.id = response.data.id;
+                    this.user = response.data;
                     if(!this.user.id) {
                         alert('That email and password combination do not exist!');
+                        this.user = {};
                     }
                     else {
                         console.log(response.data.email);
