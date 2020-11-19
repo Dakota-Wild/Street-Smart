@@ -1,17 +1,17 @@
 <template>
   <div>
-    
-
     <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
-    <body id="results-container">
-      <div class="results">
-        <div id="inputs"></div>
-        <div class="results">
-          <strong>Results</strong>
-        </div>
-        <div id="output"></div>
-      </div>
-    </body>
+      <card shadow type="secondary">
+        <body id="results-container">
+          <div class="results">
+            <div id="inputs"></div>
+            <div class="results">
+              <strong>Results</strong>
+            </div>
+            <div id="output"></div>
+          </div>
+        </body>
+      </card>
     </base-header>
 
     <body>
@@ -49,7 +49,7 @@ export default {
     // const currentDate = new Date();
     const origin1 = { lat: 34.0589, lng: -117.8194 }; // cpp by default
     // destination = { lat: 34.068921, lng: -118.4473698 }, //ucla by default
-    
+
     const destinationIcon =
       "https://chart.googleapis.com/chart?" +
       "chst=d_map_pin_letter&chld=D|FF0000|000000";
@@ -206,10 +206,12 @@ function deleteMarkers(markersArray) {
 }
 #output {
   background-color: transparent;
+  color: black;
+  font: 25px Arial;
 }
 
 .results {
-  color: white;
+  color: black;
   background: transparent;
   width: 100%;
 }
