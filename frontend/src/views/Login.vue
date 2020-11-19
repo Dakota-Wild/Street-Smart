@@ -7,7 +7,8 @@
                             <base-input class="input-group-alternative mb-3"
                                         placeholder="Email"
                                         addon-left-icon="ni ni-email-83"
-                                        v-model="user.email">
+                                        v-model="user.email"
+                                        v-bind:email="user.email">
                             </base-input>
 
                             <base-input class="input-group-alternative"

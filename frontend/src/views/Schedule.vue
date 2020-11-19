@@ -1,40 +1,12 @@
-<template>
-  <div class="text-center section">
-    <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
-    </base-header>
-    <div class="container-fluid mt--7">
-      <vc-calendar
-        class="custom-calendar max-w-full"
-        :masks="masks"
-        :attributes="attributes"
-        disable-page-swipe
-        is-expanded
-      >
-        <template v-slot:day-content="{ day, attributes }">
-          <div class="flex flex-col h-full z-10 overflow-hidden">
-            <span class="day-label text-sm text-gray-900">{{ day.day }}</span>
-            <div class="flex-grow overflow-y-auto overflow-x-auto">
-              <p
-                v-for="attr in attributes"
-                v-bind:key="attr.key"
-                class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1"
-                :class="attr.customData.class"
-              >
-                {{ attr.customData.title }}
-              </p>
-            </div>
-          </div>
-        </template>
-      </vc-calendar>
-    </div>
-  </div>
-</template>
-
 <script>
 export default {
+  props: {
+    email: String
+  },
   data() {
     const month = new Date().getMonth();
     const year = new Date().getFullYear();
+    console.log(this.email);
     return {
       masks: {
         weekdays: "WWW",
@@ -117,6 +89,41 @@ export default {
   },
 };
 </script>
+
+<template>
+  <div class="text-center section">
+    <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
+    </base-header>
+    <div class="container-fluid mt--7">
+      <vc-calendar
+        class="custom-calendar max-w-full"
+        :masks="masks"
+        :attributes="attributes"
+        disable-page-swipe
+        is-expanded
+      >
+        <template v-slot:day-content="{ day, attributes }">
+          <div class="flex flex-col h-full z-10 overflow-hidden">
+            <span class="day-label text-sm text-gray-900">{{ day.day }}</span>
+            <div class="flex-grow overflow-y-auto overflow-x-auto">
+              <p
+                v-for="attr in attributes"
+                v-bind:key="attr.key"
+                class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1"
+                :class="attr.customData.class"
+              >
+                {{ attr.customData.title }}
+              </p>
+              <p>
+                {{email}}
+              </p>
+            </div>
+          </div>
+        </template>
+      </vc-calendar>
+    </div>
+  </div>
+</template>
 
 <style lang="postcss" scoped>
 <meta
