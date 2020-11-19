@@ -56,7 +56,7 @@
                           <label>Event Start Time</label>
                           <br />
                           <vue-timepicker
-                            v-model="schedule.event.StartTime"
+                            v-model="schedule.eventStartTime"
                             format="hh:mm a"
                           ></vue-timepicker>
                         </div>
