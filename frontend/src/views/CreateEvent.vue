@@ -23,8 +23,8 @@
               </div>
             </div>
             <template>
-              <div class="submitform"> 
-                <div v-if="!submitted"> 
+              <div class="submitform">
+                <div v-if="!submitted">
                   <form @submit.prevent>
                     <div class="pl-lg-4">
                       <div class="row">
@@ -56,7 +56,7 @@
                           <label>Event Start Time</label>
                           <br />
                           <vue-timepicker
-                            v-model="schedule.startTime"
+                            v-model="schedule.event.StartTime"
                             format="hh:mm a"
                           ></vue-timepicker>
                         </div>
@@ -89,7 +89,9 @@
                 </div>
                 <div v-else>
                   <h4>Your event has been added!</h4>
-                    <button class="btn btn-success" v-on:click="newSchedule">Add another event</button>
+                  <button class="btn btn-success" v-on:click="newSchedule">
+                    Add another event
+                  </button>
                 </div>
                 <hr class="my-4" />
               </div>
@@ -121,7 +123,7 @@ export default {
         address: "",
         userEmail: "",
       },
-      submitted:false
+      submitted: false,
     };
   },
 
@@ -177,7 +179,7 @@ export default {
   methods: {
     saveSchedule() {
       var data = {
-        eventName: this.schedule.firstName,
+        eventName: this.schedule.eventName,
         eventStartTime: this.schedule.eventStartTime,
         eventDate: this.schedule.eventDate,
         arrivalTime: this.schedule.arrivalTime,
