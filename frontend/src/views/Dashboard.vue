@@ -18,8 +18,10 @@
 </template>
 <script>
   import Maps from './Maps';
-
   export default {
+    props: {
+    email: String
+  },
     components: {
       Maps,
     },

@@ -8,7 +8,7 @@
                                         placeholder="Email"
                                         addon-left-icon="ni ni-email-83"
                                         v-model="user.email"
-                                        v-bind:email="user.email">
+                                        v-bind:email="'user.email'">
                             </base-input>
 
                             <base-input class="input-group-alternative"
@@ -60,8 +60,11 @@ import router from "../router";
                         this.user = {};
                     }
                     else {
-                        console.log(response.data.email);
                         router.push('/dashboard');
+                        console.log(this.$store.state.email);
+                        console.log(this.$store.getters.getEmail);
+                        this.$store.commit('change', 'blah2');
+                        console.log(this.$store.state.email);
                     }
                 })
                 .catch(e => {

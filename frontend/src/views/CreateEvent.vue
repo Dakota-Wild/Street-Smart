@@ -110,9 +110,14 @@ import "vue2-timepicker/dist/VueTimepicker.css";
 import "vue-date-pick/dist/vueDatePick.css";
 
 export default {
+  // props: {
+  //   email: String
+  // },
+  props: ['email'],
   name: "create-event",
   components: { VueTimepicker, DatePick },
   data() {
+    console.log(this.email + "we good");
     return {
       schedule: {
         id: "",
@@ -121,14 +126,14 @@ export default {
         eventDate: "",
         arrivalTime: "",
         address: "",
-        userEmail: "",
-        leaveByTime: "Jjjjjj",
+        userEmail: this.email,
       },
       submitted: false,
     };
   },
 
   mounted() {
+    // let placeSearch;
     const componentForm = {
       street_number: "short_name",
       route: "long_name",

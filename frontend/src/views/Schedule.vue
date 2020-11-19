@@ -114,9 +114,6 @@ export default {
               >
                 {{ attr.customData.title }}
               </p>
-              <p>
-                {{email}}
-              </p>
             </div>
           </div>
         </template>
