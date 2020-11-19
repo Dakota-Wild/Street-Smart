@@ -32,7 +32,7 @@
                         label="Event Name"
                         placeholder="Event Name"
                         input-classes="form-control-alternative"
-                        v-model="user.eventName"
+                        v-model="schedule.eventName"
                         name="eventName"
                       />
                     </div>
@@ -43,7 +43,7 @@
                         label="Event Address"
                         placeholder="FE: 3801 W Temple Ave, Pomona, CA 91768"
                         input-classes="form-control-alternative"
-                        v-model="user.address"
+                        v-model="schedule.address"
                         name="address"
                       />
                     </div>
@@ -55,7 +55,7 @@
                         label="Email"
                         placeholder="example@example.com"
                         input-classes="form-control-alternative"
-                        v-model="user.email"
+                        v-model="schedule.email"
                         name="email"
                       />
                     </div>
@@ -63,7 +63,7 @@
                       <label>Event Date</label>
                       <br />
                       <date-pick
-                        v-model="user.eventDate"
+                        v-model="schedule.eventDate"
                         :displayFormat="'DD.MM.YYYY'"
                       ></date-pick>
                     </div>
@@ -73,7 +73,7 @@
                       <label>Event Start Time</label>
                       <br />
                       <vue-timepicker
-                        v-model="user.startTime"
+                        v-model="schedule.startTime"
                         format="hh:mm a"
                       ></vue-timepicker>
                     </div>
@@ -81,13 +81,13 @@
                       <label>Desired Arrival Time</label>
                       <br />
                       <vue-timepicker
-                        v-model="user.arrivalTime"
+                        v-model="schedule.arrivalTime"
                         format="hh:mm a"
                       ></vue-timepicker>
                     </div>
                   </div>
                   <div class="row"></div>
-                  <button v-on:click="saveUser" class="btn btn-success">
+                  <button v-on:click="saveSchedule" class="btn btn-success">
                     Submit
                   </button>
                 </div>
@@ -108,18 +108,18 @@ import "vue2-timepicker/dist/VueTimepicker.css";
 import "vue-date-pick/dist/vueDatePick.css";
 
 export default {
-  name: "user-profile",
+  name: "create-event",
   components: { VueTimepicker, DatePick },
   data() {
     return {
-      user: {
+      schedule: {
         id: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        homeAddress: "",
-        password: "",
-        date: "",
+        eventName: "",
+        eventStartTime: "",
+        eventDate: "",
+        arrivalTime: "",
+        address: "",
+        userEmail: "",
       },
     };
   },
@@ -127,67 +127,92 @@ export default {
   mounted() {
     // let placeSearch;
 
-    const componentForm = {
-      street_number: "short_name",
-      route: "long_name",
-      locality: "long_name",
-      administrative_area_level_1: "short_name",
-      country: "long_name",
-      postal_code: "short_name",
-    };
+const componentForm = {
+  street_number: "short_name",
+  route: "long_name",
+  locality: "long_name",
+  administrative_area_level_1: "short_name",
+  country: "long_name",
+  postal_code: "short_name",
+};
 
-      let google = window.google
-      // Create the autocomplete object, restricting the search predictions to
-      // geographical location types.
-      let autocomplete = new google.maps.places.Autocomplete(
-        document.getElementById("addressInput"),
-        { types: ["geocode"] }
-      );
-      // Avoid paying for data that you don't need by restricting the set of
-      // place fields that are returned to just the address components.
-      autocomplete.setFields(["address_component"]);
-      // When the user selects an address from the drop-down, populate the
-      // address fields in the form.
-      autocomplete.addListener("place_changed", fillInAddress(componentForm, autocomplete));
+  let google = window.google
+  // Create the autocomplete object, restricting the search predictions to
+  // geographical location types.
+  let autocomplete = new google.maps.places.Autocomplete(
+    document.getElementById("addressInput"),
+    { types: ["geocode"] }
+  );
+  // Avoid paying for data that you don't need by restricting the set of
+  // place fields that are returned to just the address components.
+  autocomplete.setFields(["address_component"]);
+  // When the user selects an address from the drop-down, populate the
+  // address fields in the form.
+  autocomplete.addListener("place_changed", fillInAddress());
+
+fillInAddress(); {
+  // Get the place details from the autocomplete object.
+  const place = autocomplete.getPlace();
+
+  for (const component in componentForm) {
+    document.getElementById(component).value = "";
+    document.getElementById(component).disabled = false;
+  }
+
+  // Get each component of the address from the place details,
+  // and then fill-in the corresponding field on the form.
+  for (const component of place.address_components) {
+    const addressType = component.types[0];
+
+    if (componentForm[addressType]) {
+      const val = component[componentForm[addressType]];
+      document.getElementById(addressType).value = val;
+    }
+  }
+}
+
   },
 
   methods: {
-    saveUser() {
+    saveSchedule() {
       var data = {
-        firstName: this.user.firstName,
-        lastName: this.user.lastName,
-        email: this.user.email,
-        homeAddress: this.user.homeAddress,
-        password: this.user.password,
+        eventName: this.schedule.firstName,
+        eventStartTime: this.schedule.eventStartTime,
+        eventDate: this.schedule.eventDate,
+        arrivalTime: this.schedule.arrivalTime,
+        address: this.schedule.address,
+        userEmail: this.schedule.userEmail
       };
       http
-        .post("/user", data)
+        .post("/schedule", data)
         .then((response) => {
-          this.user.id = response.data.id;
+          this.schedule.id = response.data.id;
           console.log(response.data);
         })
         .catch((e) => {
           console.log(e);
         });
     },
-    newUser() {
+    newSchedule() {
       this.submitted = false;
-      this.user = {};
+      this.schedule = {};
     },
   },
 };
-
 function fillInAddress(componentForm, autocomplete) {
   // Get the place details from the autocomplete object.
   const place = autocomplete.getPlace();
+
   for (const component in componentForm) {
     document.getElementById(component).value = "";
     document.getElementById(component).disabled = false;
   }
+
   // Get each component of the address from the place details,
   // and then fill-in the corresponding field on the form.
   for (const component of place.address_components) {
     const addressType = component.types[0];
+
     if (componentForm[addressType]) {
       const val = component[componentForm[addressType]];
       document.getElementById(addressType).value = val;
