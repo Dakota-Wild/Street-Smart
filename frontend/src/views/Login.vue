@@ -32,6 +32,7 @@
 </template>
 <script>
 import http from "../http-common";
+import router from "../router";
 
   export default {
     name: 'login',
@@ -59,6 +60,7 @@ import http from "../http-common";
                     }
                     else {
                         console.log(response.data.email);
+                        router.push('/dashboard');
                     }
                 })
                 .catch(e => {
