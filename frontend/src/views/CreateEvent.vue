@@ -23,68 +23,76 @@
               </div>
             </div>
             <template>
-              <form @submit.prevent>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <base-input
-                        alternative=""
-                        label="Event Name"
-                        placeholder="Event Name"
-                        input-classes="form-control-alternative"
-                        v-model="schedule.eventName"
-                        name="eventName"
-                      />
+              <div class="submitform"> 
+                <div v-if="!submitted"> 
+                  <form @submit.prevent>
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <base-input
+                            alternative=""
+                            label="Event Name"
+                            placeholder="Event Name"
+                            input-classes="form-control-alternative"
+                            v-model="schedule.eventName"
+                            name="eventName"
+                          />
+                        </div>
+                        <div class="col-lg-6">
+                          <base-input
+                            id="addressInput"
+                            alternative=""
+                            label="Event Address"
+                            placeholder="Example Ave, City, State 12345"
+                            input-classes="form-control-alternative"
+                            v-model="schedule.address"
+                            name="address"
+                          >
+                          </base-input>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <label>Event Start Time</label>
+                          <br />
+                          <vue-timepicker
+                            v-model="schedule.startTime"
+                            format="hh:mm a"
+                          ></vue-timepicker>
+                        </div>
+                        <div class="col-lg-6">
+                          <label>Desired Arrival Time</label>
+                          <br />
+                          <vue-timepicker
+                            v-model="schedule.arrivalTime"
+                            format="hh:mm a"
+                          ></vue-timepicker>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <br />
+                          <label>Event Date</label>
+                          <br />
+                          <date-pick
+                            v-model="schedule.eventDate"
+                            :displayFormat="'DD.MM.YYYY'"
+                          ></date-pick>
+                        </div>
+                      </div>
+                      <div class="row"></div>
+                      <button v-on:click="saveSchedule" class="btn btn-success">
+                        Submit
+                      </button>
                     </div>
-                    <div class="col-lg-6">
-                      <base-input
-                        id="addressInput"
-                        alternative=""
-                        label="Event Address"
-                        placeholder="Example Ave, City, State 12345"
-                        input-classes="form-control-alternative"
-                        v-model="schedule.address"
-                        name="address"
-                      >
-                      </base-input>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <label>Event Start Time</label>
-                      <br />
-                      <vue-timepicker
-                        v-model="schedule.startTime"
-                        format="hh:mm a"
-                      ></vue-timepicker>
-                    </div>
-                    <div class="col-lg-6">
-                      <label>Desired Arrival Time</label>
-                      <br />
-                      <vue-timepicker
-                        v-model="schedule.arrivalTime"
-                        format="hh:mm a"
-                      ></vue-timepicker>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <br />
-                      <label>Event Date</label>
-                      <br />
-                      <date-pick
-                        v-model="schedule.eventDate"
-                        :displayFormat="'DD.MM.YYYY'"
-                      ></date-pick>
-                    </div>
-                  </div>
-                  <div class="row"></div>
-                  <button v-on:click="saveSchedule" class="btn btn-success">
-                    Submit
-                  </button>
+                  </form>
+                </div>
+                <div v-else>
+                  <h4>Your event has been added!</h4>
+                    <button class="btn btn-success" v-on:click="newSchedule">Add another event</button>
                 </div>
                 <hr class="my-4" />
-              </form>
+              </div>
             </template>
           </card>
         </div>
@@ -113,6 +121,7 @@ export default {
         address: "",
         userEmail: "",
       },
+      submitted:false
     };
   },
 
@@ -184,6 +193,7 @@ export default {
         .catch((e) => {
           console.log(e);
         });
+      this.submitted = true;
     },
     newSchedule() {
       this.submitted = false;

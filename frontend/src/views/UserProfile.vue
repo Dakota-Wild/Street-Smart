@@ -71,7 +71,7 @@
                                     </form>
                                 </div>
                                 <div v-else>
-                                <h4>You submitted successfully!</h4>
+                                    <h4>You submitted successfully!</h4>
                                     <button class="btn btn-success" v-on:click="newUser">Add</button>
                                 </div>
                                 <hr class="my-4" />
