@@ -121,6 +121,16 @@ import http from "../http-common";
         newUser() {
             this.submitted = false;
             this.user = {};
+        },
+        getUser() {
+            http
+                .get("/user/" + this.$store.state.email)
+                .then(response => {
+                    this.user = response.data;
+                })
+                .catch(e => {
+                    console.log(e)
+                });
         }   
     }
   };
