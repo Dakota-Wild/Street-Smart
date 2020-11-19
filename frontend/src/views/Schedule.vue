@@ -1,4 +1,6 @@
 <script>
+import http from "../http-common";
+
 export default {
   props: {
     email: String
