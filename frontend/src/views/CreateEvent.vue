@@ -81,7 +81,7 @@
                         </div>
                       </div>
                       <div class="row"></div>
-                      <button v-on:click="saveSchedule" class="btn btn-success">
+                      <button v-on:click="calculate" class="btn btn-success">
                         Submit
                       </button>
                     </div>
@@ -126,6 +126,7 @@ export default {
         arrivalTime: "",
         address: "",
         userEmail: this.$store.state.email,
+        leaveByTime: "",
       },
       submitted: false,
     };
@@ -165,43 +166,81 @@ export default {
   // });
 
   methods: {
-    saveSchedule() {
+    calculate() {
       this.schedule.address = document.getElementById("addressInput").value;
       //upon saveSchedule calculate the time to leave by
-      const origin = { lat: 34.0589, lng: -117.8194 }; // cpp by default
-      const destination = { lat: 34.068921, lng: -118.4473698 }; //ucla by default
-      let google = window.google;
+      const origin = { lat: 34.0589, lng: -117.8194 } // cpp by default
+      // const destination = { lat: 34.068921, lng: -118.4473698 } //ucla by default
+      let google = window.google
       // const geocoder = new google.maps.Geocoder();
       const service = new google.maps.DistanceMatrixService();
       var tempTime;
 
+      console.log(this.schedule.address);
       service.getDistanceMatrix(
         {
           origins: [origin],
-          destinations: [destination],
+          destinations: [this.schedule.address],
           travelMode: google.maps.TravelMode.DRIVING,
           unitSystem: google.maps.UnitSystem.IMPERIAL,
           avoidHighways: false,
           avoidTolls: false,
         },
-        (response, status) => {
+        (response, status) => { //this part of the code waits for the response for google then runs the below code
           if (status !== "OK") {
             alert("Error was: " + status);
           } else {
             const results = response.rows[0].elements;
+              tempTime = results[0].duration.value;
 
-            tempTime = results[0].duration.value;
-            console.log("leaveBy from the function: " + tempTime);
-            this.schedule.leaveByTime = tempTime;
+              //begin calculations
+              var timeInSeconds = tempTime;
+              // var timeInSeconds = 5990; //for testing purposes only
+              var drivingTime = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);
+              console.log("driving time: " + drivingTime);
+              var drivingTimeHours = drivingTime.substring(0,2);
+              var drivingTimeMinutes = drivingTime.substring(3,5);
+              // var drivingTimeSeconds = drivingTime.substring(6);
+              // console.log(drivingTimeHours + " " + drivingTimeMinutes);
+
+              var tempArrivalTime = this.schedule.arrivalTime;
+              // console.log(tempArrivalTime);
+              var arrivalTimeHours = tempArrivalTime.substring(0,2);
+              var arrivalTimeMinutes = tempArrivalTime.substring(3,5);
+              // console.log(arrivalTimeHours + " " + arrivalTimeMinutes);
+
+              var leaveTimeMinutes = null;
+              var leaveTimeHours = null;
+              var leaveTimePeriod = tempArrivalTime.substring(6);
+              leaveTimeMinutes = arrivalTimeMinutes - drivingTimeMinutes;
+              if (leaveTimeMinutes < 0)
+              {
+                leaveTimeMinutes = leaveTimeMinutes + 60;
+                arrivalTimeHours = arrivalTimeHours - 1;
+              }
+              leaveTimeHours = arrivalTimeHours - drivingTimeHours;
+              if (leaveTimeHours < 1)
+              {
+                leaveTimeHours = leaveTimeHours + 12;
+                // console.log(tempArrivalTime.substring(6))
+                if (tempArrivalTime.substring(6) == "am")
+                {
+                  leaveTimePeriod = "pm";
+                }
+                else {
+                  leaveTimePeriod = "am"
+                }
+              }
+              var leaveTime = leaveTimeHours + ":" + leaveTimeMinutes + " " + leaveTimePeriod;
+              console.log(leaveTime);
+              this.schedule.leaveByTime = leaveTime;
+              //end of 4AM calculation code
+              this.saveSchedule();
+            }
           }
-        }
-      );
-      var timeInSeconds = 2990; //for testing purposes only
-      console.log(timeInSeconds / 60);
-      var tempArrivalTime = this.schedule.arrivalTime;
-      console.log(tempArrivalTime.substring(0, 2));
-
-      //end of calculations
+        )
+    },
+    saveSchedule() {
 
       var data = {
         eventName: this.schedule.eventName,
