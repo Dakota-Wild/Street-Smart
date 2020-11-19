@@ -30,6 +30,22 @@ public class UserController {
     //     return users;
     // }
 
+    @GetMapping("login-check")
+    public User checkValidLogin(User user) {
+      System.out.println(user.getEmail());
+      User _user = userRepository.findByEmail(user.getEmail());
+      if(_user == null) {
+        return null;
+      }
+
+      if(!user.getPassword().equals(_user.getPassword())) {
+        System.out.println("Incorrect password.");
+        return null;
+      }
+
+      return _user;
+    }
+
     @PostMapping("/user")
     public User postUser(@RequestBody User user) {
  
