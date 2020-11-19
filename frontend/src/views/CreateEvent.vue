@@ -130,15 +130,6 @@ export default {
   mounted() {
     // let placeSearch;
 
-    const componentForm = {
-      street_number: "short_name",
-      route: "long_name",
-      locality: "long_name",
-      administrative_area_level_1: "short_name",
-      country: "long_name",
-      postal_code: "short_name",
-    };
-
     let google = window.google;
     // Create the autocomplete object, restricting the search predictions to
     // geographical location types.
@@ -151,29 +142,9 @@ export default {
     autocomplete.setFields(["address_component"]);
     // When the user selects an address from the drop-down, populate the
     // address fields in the form.
-    autocomplete.addListener("place_changed", fillInAddress());
-
-    fillInAddress();
-    {
-      // Get the place details from the autocomplete object.
-      const place = autocomplete.getPlace();
-
-      for (const component in componentForm) {
-        document.getElementById(component).value = "";
-        document.getElementById(component).disabled = false;
-      }
-
-      // Get each component of the address from the place details,
-      // and then fill-in the corresponding field on the form.
-      for (const component of place.address_components) {
-        const addressType = component.types[0];
-
-        if (componentForm[addressType]) {
-          const val = component[componentForm[addressType]];
-          document.getElementById(addressType).value = val;
-        }
-      }
-    }
+    autocomplete.addListener("place_changed", () => {
+      this.schedule.address = document.getElementById("addressInput").value;
+    });
   },
 
   methods: {
@@ -203,25 +174,5 @@ export default {
     },
   },
 };
-function fillInAddress(componentForm, autocomplete) {
-  // Get the place details from the autocomplete object.
-  const place = autocomplete.getPlace();
-
-  for (const component in componentForm) {
-    document.getElementById(component).value = "";
-    document.getElementById(component).disabled = false;
-  }
-
-  // Get each component of the address from the place details,
-  // and then fill-in the corresponding field on the form.
-  for (const component of place.address_components) {
-    const addressType = component.types[0];
-
-    if (componentForm[addressType]) {
-      const val = component[componentForm[addressType]];
-      document.getElementById(addressType).value = val;
-    }
-  }
-}
 </script>
 <style></style>
