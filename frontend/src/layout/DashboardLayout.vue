@@ -15,7 +15,7 @@
         />
         <sidebar-item
           :link="{
-            name: 'CreateEvent',
+            name: 'Create Event',
             icon: 'ni ni-calendar-grid-58',
             path: '/createevent',
           }"
