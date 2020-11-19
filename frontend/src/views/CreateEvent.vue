@@ -37,15 +37,15 @@
                       />
                     </div>
                     <div class="col-lg-6">
-                      <input
+                      <base-input
                         id = "addressInput"
                         alternative=""
                         label="Event Address"
-                        placeholder="FE: 3801 W Temple Ave, Pomona, CA 91768"
+                        placeholder="Example Ave, City, State 12345"
                         input-classes="form-control-alternative"
                         v-model="schedule.address"
-                        name="address"
-                      />
+                        name="address">
+                      </base-input>
                     </div>
                   </div>
                   <div class="row">
