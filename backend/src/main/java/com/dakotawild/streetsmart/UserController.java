@@ -1,5 +1,7 @@
 package com.dakotawild.streetsmart;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,6 +54,12 @@ public class UserController {
  
       User _user = userRepository.save(new User(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.getHomeAddress()));
       return _user;
+    }
+
+    @GetMapping("/schedule/{email}")
+    public List<Schedule> getSchedule(@PathVariable String email) {
+       List<Schedule> _schedule = scheduleRepository.findByUserEmail(email);
+       return _schedule;
     }
 
     @PostMapping("/schedule")

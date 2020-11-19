@@ -6,7 +6,11 @@
             Upcoming events
           </div>
           <div class="event">
-            You have no scheduled events
+            <ul>
+              <li v-for="event in schedule" v-bind:key="event.id">
+                {{ event.eventName }}
+              </li>
+            </ul>
           </div>
         </card>
       </base-header>
@@ -17,6 +21,7 @@
     </div>
 </template>
 <script>
+  import http from '../http-common';
   import Maps from './Maps';
   export default {
     props: {
@@ -25,12 +30,37 @@
     components: {
       Maps,
     },
+    created() {
+      this.getEvents();
+    },
+    mounted() {
+      this.user.email = this.$store.state.email;
+      this.getEvents();
+    },
     data() {
       return {
-      };
+        schedule: [],
+        user: {
+                id: '',
+                firstName: '',
+                lastName: '',
+                email: '',
+                homeAddress: '',
+                password: ''
+            }
+      }
     },
     methods: {
-      
+      getEvents() {
+        http
+            .get("/schedule/" + this.user.email)
+            .then(response => {
+              this.schedule = response.data;
+            })
+            .catch(e => {
+              console.log(e);
+            });
+      }
     },
   };
 </script>

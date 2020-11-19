@@ -8,14 +8,16 @@
                                         placeholder="Email"
                                         addon-left-icon="ni ni-email-83"
                                         v-model="user.email"
-                                        v-bind:email="'user.email'">
+                                        v-bind:email="'user.email'"
+                                        v-on:keyup.enter="checkValidLogin">
                             </base-input>
 
                             <base-input class="input-group-alternative"
                                         placeholder="Password"
                                         type="password"
                                         addon-left-icon="ni ni-lock-circle-open"
-                                        v-model="user.password">
+                                        v-model="user.password"
+                                        v-on:keyup.enter="checkValidLogin">
                             </base-input>
                             <div class="text-center">
                                 <base-button @click="checkValidLogin" type="primary" class="my-4">Sign in</base-button>

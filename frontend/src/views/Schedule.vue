@@ -10,6 +10,15 @@ export default {
       masks: {
         weekdays: "WWW",
       },
+      schedule: [],
+      user: {
+                id: '',
+                firstName: '',
+                lastName: '',
+                email: '',
+                homeAddress: '',
+                password: ''
+      },
       attributes: [
         {
           key: 1,
@@ -86,6 +95,18 @@ export default {
       ],
     };
   },
+  methods: {
+    getEvents() {
+        http
+            .get("/schedule/" + this.user.email)
+            .then(response => {
+              this.schedule = response.data;
+            })
+            .catch(e => {
+              console.log(e);
+            });
+      }
+  }
 };
 </script>
 
