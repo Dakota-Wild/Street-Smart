@@ -46,8 +46,10 @@ export default {
   mounted() {
     let google = window.google;
 
-    const origin1 = { lat: 34.068921, lng: -118.4473698 }; //cpp
-    //const destinationA = { lat: 34.0589, lng: -117.8194 }; // ucla
+    // const currentDate = new Date();
+    const origin1 = { lat: 34.0589, lng: -117.8194 }; // cpp by default
+    // destination = { lat: 34.068921, lng: -118.4473698 }, //ucla by default
+    
     const destinationIcon =
       "https://chart.googleapis.com/chart?" +
       "chst=d_map_pin_letter&chld=D|FF0000|000000";
@@ -79,7 +81,7 @@ export default {
       service.getDistanceMatrix(
         {
           origins: [origin1],
-          destinations: [places[0].geometry.location],
+          destinations: [input.value],
           travelMode: google.maps.TravelMode.DRIVING,
           unitSystem: google.maps.UnitSystem.METRIC,
           avoidHighways: false,
