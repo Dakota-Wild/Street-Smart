@@ -27,7 +27,8 @@
                                     v-model="user.email">
                         </base-input>
 
-                        <base-input class="input-group alternative"
+                        <base-input id = "homeAddressInput"
+                                    class="input-group alternative"
                                     placeholder="Home Address"
                                     addon-left-icon="ni ni-lock-circle-open"
                                     v-model="user.homeAddress">
@@ -84,6 +85,34 @@ import http from "../http-common";
                 }
             }   
         },
+
+        mounted() {
+                // let placeSearch;
+
+                const componentForm = {
+                street_number: "short_name",
+                route: "long_name",
+                locality: "long_name",
+                administrative_area_level_1: "short_name",
+                country: "long_name",
+                postal_code: "short_name",
+                };
+
+                let google = window.google
+                // Create the autocomplete object, restricting the search predictions to
+                // geographical location types.
+                let autocomplete = new google.maps.places.Autocomplete(
+                    document.getElementById("homeAddressInput"),
+                    { types: ["geocode"] }
+                );
+                // Avoid paying for data that you don't need by restricting the set of
+                // place fields that are returned to just the address components.
+                autocomplete.setFields(["address_component"]);
+                // When the user selects an address from the drop-down, populate the
+                // address fields in the form.
+                autocomplete.addListener("place_changed", fillInAddress(componentForm, autocomplete));
+            },
+
     methods: {
         saveUser() {
             var data = {
@@ -109,6 +138,26 @@ import http from "../http-common";
         }   
     }
   }
+  function fillInAddress(componentForm, autocomplete) {
+  // Get the place details from the autocomplete object.
+  const place = autocomplete.getPlace();
+
+  for (const component in componentForm) {
+    document.getElementById(component).value = "";
+    document.getElementById(component).disabled = false;
+  }
+
+  // Get each component of the address from the place details,
+  // and then fill-in the corresponding field on the form.
+  for (const component of place.address_components) {
+    const addressType = component.types[0];
+
+    if (componentForm[addressType]) {
+      const val = component[componentForm[addressType]];
+      document.getElementById(addressType).value = val;
+    }
+  }
+}
 </script>
 <style>
 </style>

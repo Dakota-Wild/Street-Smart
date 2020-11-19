@@ -18,7 +18,7 @@
             <div slot="header" class="bg-white border-0">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">My account</h3>
+                  <h3 class="mb-0"></h3>
                 </div>
               </div>
             </div>
@@ -37,15 +37,16 @@
                       />
                     </div>
                     <div class="col-lg-6">
-                      <input
-                        id = "addressInput"
+                      <base-input
+                        id="addressInput"
                         alternative=""
                         label="Event Address"
-                        placeholder="FE: 3801 W Temple Ave, Pomona, CA 91768"
+                        placeholder="Example Ave, City, State 12345"
                         input-classes="form-control-alternative"
                         v-model="schedule.address"
                         name="address"
-                      />
+                      >
+                      </base-input>
                     </div>
                   </div>
                   <div class="row">
@@ -127,50 +128,50 @@ export default {
   mounted() {
     // let placeSearch;
 
-const componentForm = {
-  street_number: "short_name",
-  route: "long_name",
-  locality: "long_name",
-  administrative_area_level_1: "short_name",
-  country: "long_name",
-  postal_code: "short_name",
-};
+    const componentForm = {
+      street_number: "short_name",
+      route: "long_name",
+      locality: "long_name",
+      administrative_area_level_1: "short_name",
+      country: "long_name",
+      postal_code: "short_name",
+    };
 
-  let google = window.google
-  // Create the autocomplete object, restricting the search predictions to
-  // geographical location types.
-  let autocomplete = new google.maps.places.Autocomplete(
-    document.getElementById("addressInput"),
-    { types: ["geocode"] }
-  );
-  // Avoid paying for data that you don't need by restricting the set of
-  // place fields that are returned to just the address components.
-  autocomplete.setFields(["address_component"]);
-  // When the user selects an address from the drop-down, populate the
-  // address fields in the form.
-  autocomplete.addListener("place_changed", fillInAddress());
+    let google = window.google;
+    // Create the autocomplete object, restricting the search predictions to
+    // geographical location types.
+    let autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById("addressInput"),
+      { types: ["geocode"] }
+    );
+    // Avoid paying for data that you don't need by restricting the set of
+    // place fields that are returned to just the address components.
+    autocomplete.setFields(["address_component"]);
+    // When the user selects an address from the drop-down, populate the
+    // address fields in the form.
+    autocomplete.addListener("place_changed", fillInAddress());
 
-fillInAddress(); {
-  // Get the place details from the autocomplete object.
-  const place = autocomplete.getPlace();
+    fillInAddress();
+    {
+      // Get the place details from the autocomplete object.
+      const place = autocomplete.getPlace();
 
-  for (const component in componentForm) {
-    document.getElementById(component).value = "";
-    document.getElementById(component).disabled = false;
-  }
+      for (const component in componentForm) {
+        document.getElementById(component).value = "";
+        document.getElementById(component).disabled = false;
+      }
 
-  // Get each component of the address from the place details,
-  // and then fill-in the corresponding field on the form.
-  for (const component of place.address_components) {
-    const addressType = component.types[0];
+      // Get each component of the address from the place details,
+      // and then fill-in the corresponding field on the form.
+      for (const component of place.address_components) {
+        const addressType = component.types[0];
 
-    if (componentForm[addressType]) {
-      const val = component[componentForm[addressType]];
-      document.getElementById(addressType).value = val;
+        if (componentForm[addressType]) {
+          const val = component[componentForm[addressType]];
+          document.getElementById(addressType).value = val;
+        }
+      }
     }
-  }
-}
-
   },
 
   methods: {
@@ -181,7 +182,7 @@ fillInAddress(); {
         eventDate: this.schedule.eventDate,
         arrivalTime: this.schedule.arrivalTime,
         address: this.schedule.address,
-        userEmail: this.schedule.userEmail
+        userEmail: this.schedule.userEmail,
       };
       http
         .post("/schedule", data)
