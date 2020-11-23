@@ -14,14 +14,16 @@ public class Schedule {
     private String arrivalTime;
     private String address;
     private String userEmail;
+    private String leaveByTime;
 
-    public Schedule(String eventName, String eventStartTime, String eventDate, String arrivalTime, String address, String userEmail){
+    public Schedule(String eventName, String eventStartTime, String eventDate, String arrivalTime, String address, String userEmail, String leaveByTime){
         this.eventName = eventName;
         this.eventStartTime = eventStartTime;
         this.eventDate = eventDate;
         this.arrivalTime = arrivalTime;
         this.address = address;
         this.userEmail = userEmail;
+        this.leaveByTime = leaveByTime;
     }
 
     @Override
@@ -78,5 +80,13 @@ public class Schedule {
 
     public void setEventEmail(String userEmail){
         this.userEmail = userEmail;
+    }
+
+    public String getLeaveByTime(){
+        return this.leaveByTime;
+    }
+
+    public void setLeaveByTime(String leaveByTime){
+        this.leaveByTime = leaveByTime;
     }
 }

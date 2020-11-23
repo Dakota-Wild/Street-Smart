@@ -11,5 +11,6 @@ public interface ScheduleRepository extends MongoRepository<Schedule, String> {
     public List<Schedule> findByArrivalTime(String arrivalTime);
     public List<Schedule> findByAddress(String address);
     public List<Schedule> findByUserEmail(String userEmail);
+    public List<Schedule> findByLeaveByTime(String leaveByTime);
 
 }

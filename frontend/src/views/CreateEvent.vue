@@ -237,6 +237,7 @@ export default {
         arrivalTime: this.schedule.arrivalTime,
         address: this.schedule.address,
         userEmail: this.schedule.userEmail,
+        leaveByTime: this.schedule.leaveByTime
       };
       http
         .post("/schedule", data)
