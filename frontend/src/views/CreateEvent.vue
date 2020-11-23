@@ -113,7 +113,7 @@ export default {
   // props: {
   //   email: String
   // },
-  props: ['email'],
+  props: ["email"],
   name: "create-event",
   components: { VueTimepicker, DatePick },
   data() {
@@ -131,14 +131,13 @@ export default {
       submitted: false,
     };
   },
-
   mounted() {
-    // document.getElementById("addressInput").value = this.schedule.address;
-    // document.getElementById("addressInput").value = this.schedule.address
     let google = window.google;
     // Create the autocomplete object, restricting the search predictions to
     // geographical location types.
-    let autocomplete = new google.maps.places.Autocomplete(document.getElementById("addressInput"))
+    let autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById("addressInput")
+    );
     // Avoid paying for data that you don't need by restricting the set of
     // place fields that are returned to just the address components.
     autocomplete.setFields(["address_component"]);
@@ -150,16 +149,16 @@ export default {
       // console.log("document.getElementById(\"addressInput\")" + document.getElementById("addressInput").value)
       //upon submit calculate the time to leave by
 
-      const origin = { lat: 34.0589, lng: -117.8194 } // cpp by default
+      const origin = { lat: 34.0589, lng: -117.8194 }; // cpp by default
       // const destination = { lat: 34.068921, lng: -118.4473698 } //ucla by default
-      let google = window.google
+      let google = window.google;
       // const geocoder = new google.maps.Geocoder();
       const service = new google.maps.DistanceMatrixService();
-      
+
       var tempArrivalTime = this.schedule.arrivalTime;
-      var arrivalTimeHours = tempArrivalTime.substring(0,2);
-      var arrivalTimeMinutes = tempArrivalTime.substring(3,5);
-      var N = arrivalTimeHours*(60000*60) + arrivalTimeMinutes*60000
+      var arrivalTimeHours = tempArrivalTime.substring(0, 2);
+      var arrivalTimeMinutes = tempArrivalTime.substring(3, 5);
+      var N = arrivalTimeHours * (60000 * 60) + arrivalTimeMinutes * 60000;
 
       var tempTime;
 
@@ -172,64 +171,63 @@ export default {
           avoidHighways: false,
           avoidTolls: false,
           drivingOptions: {
-            departureTime: new Date(Date.now() + N),  // for the time N milliseconds from now.
-            trafficModel: 'optimistic'
-  }
+            departureTime: new Date(Date.now() + N), // for the time N milliseconds from now.
+            trafficModel: "optimistic",
+          },
         },
-        (response, status) => { //this part of the code waits for the response for google then runs the below code
+        (response, status) => {
+          //this part of the code waits for the response for google then runs the below code
           if (status !== "OK") {
             alert("Error was: " + status);
           } else {
             const results = response.rows[0].elements;
-              tempTime = results[0].duration.value;
+            tempTime = results[0].duration.value;
 
-              //begin calculations
-              var timeInSeconds = tempTime;
-              // var timeInSeconds = 5990; //for testing purposes only
-              var drivingTime = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);
-              console.log("driving time: " + drivingTime);
-              var drivingTimeHours = drivingTime.substring(0,2);
-              var drivingTimeMinutes = drivingTime.substring(3,5);
-              // var drivingTimeSeconds = drivingTime.substring(6);
-              // console.log(drivingTimeHours + " " + drivingTimeMinutes);
+            //begin calculations
+            var timeInSeconds = tempTime;
+            // var timeInSeconds = 5990; //for testing purposes only
+            var drivingTime = new Date(timeInSeconds * 1000)
+              .toISOString()
+              .substr(11, 8);
+            console.log("driving time: " + drivingTime);
+            var drivingTimeHours = drivingTime.substring(0, 2);
+            var drivingTimeMinutes = drivingTime.substring(3, 5);
+            // var drivingTimeSeconds = drivingTime.substring(6);
+            // console.log(drivingTimeHours + " " + drivingTimeMinutes);
 
-              // console.log(tempArrivalTime);
-              // console.log(arrivalTimeHours + " " + arrivalTimeMinutes);
+            // console.log(tempArrivalTime);
+            // console.log(arrivalTimeHours + " " + arrivalTimeMinutes);
 
-              var leaveTimeMinutes = null;
-              var leaveTimeHours = null;
-              var leaveTimePeriod = tempArrivalTime.substring(6);
-              leaveTimeMinutes = arrivalTimeMinutes - drivingTimeMinutes;
-              if (leaveTimeMinutes < 0)
-              {
-                leaveTimeMinutes = leaveTimeMinutes + 60;
-                arrivalTimeHours = arrivalTimeHours - 1;
-              }
-              leaveTimeHours = arrivalTimeHours - drivingTimeHours;
-              if (leaveTimeHours < 1)
-              {
-                leaveTimeHours = leaveTimeHours + 12;
-                // console.log(tempArrivalTime.substring(6))
-                if (tempArrivalTime.substring(6) == "am")
-                {
-                  leaveTimePeriod = "pm";
-                }
-                else {
-                  leaveTimePeriod = "am"
-                }
-              }
-              var leaveTime = leaveTimeHours + ":" + leaveTimeMinutes + " " + leaveTimePeriod;
-              console.log(leaveTime);
-              //end of 4AM calculation code
-
-              this.schedule.leaveByTime = leaveTime;
-              this.saveSchedule();
+            var leaveTimeMinutes = null;
+            var leaveTimeHours = null;
+            var leaveTimePeriod = tempArrivalTime.substring(6);
+            leaveTimeMinutes = arrivalTimeMinutes - drivingTimeMinutes;
+            if (leaveTimeMinutes < 0) {
+              leaveTimeMinutes = leaveTimeMinutes + 60;
+              arrivalTimeHours = arrivalTimeHours - 1;
             }
+            leaveTimeHours = arrivalTimeHours - drivingTimeHours;
+            if (leaveTimeHours < 1) {
+              leaveTimeHours = leaveTimeHours + 12;
+              // console.log(tempArrivalTime.substring(6))
+              if (tempArrivalTime.substring(6) == "am") {
+                leaveTimePeriod = "pm";
+              } else {
+                leaveTimePeriod = "am";
+              }
+            }
+            var leaveTime =
+              leaveTimeHours + ":" + leaveTimeMinutes + " " + leaveTimePeriod;
+            console.log(leaveTime);
+            //end of 4AM calculation code
+
+            this.schedule.leaveByTime = leaveTime;
+            this.saveSchedule();
           }
-        )
+        }
+      );
     },
     saveSchedule() {
-
       var data = {
         eventName: this.schedule.eventName,
         eventStartTime: this.schedule.eventStartTime,
@@ -237,7 +235,7 @@ export default {
         arrivalTime: this.schedule.arrivalTime,
         address: this.schedule.address,
         userEmail: this.schedule.userEmail,
-        leaveByTime: this.schedule.leaveByTime
+        leaveByTime: this.schedule.leaveByTime,
       };
       http
         .post("/schedule", data)
