@@ -7,8 +7,13 @@
         </div>
         <div class="event">
           <ul>
-            <li v-for="event in schedule" v-bind:key="event.id">
-              Event: {{ event.eventName }}, Date: {{ event.eventDate }}
+            <li
+              style="text-align: left;"
+              v-for="event in schedule"
+              v-bind:key="event.id"
+            >
+              Event: {{ event.eventName }}, Date: {{ event.eventDate }}, Leave
+              By: {{ event.leaveByTime }}
             </li>
           </ul>
         </div>
