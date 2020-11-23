@@ -97,12 +97,36 @@ export default {
       ],
     };
   },
+  created() {
+    this.user.email = this.$store.state.email;
+    this.getEvents();
+  },
+  mounted() {
+    this.user.email = this.$store.state.email;
+    this.getEvents();
+  },
   methods: {
     getEvents() {
+        var tempEvent = {
+          key: '',
+          customData: {
+            eventName: '',
+            eventStartTime: ''
+          },
+          dates: ''
+        }
+
+        
         http
             .get("/schedule/" + this.user.email)
             .then(response => {
               this.schedule = response.data;
+              this.schedule.forEach(event => {
+                tempEvent.key = event.id;
+                tempEvent.customData.eventName = event.eventName;
+                tempEvent.dates = event.eventDate;
+                this.attributes.push(tempEvent);
+              });
             })
             .catch(e => {
               console.log(e);
@@ -130,11 +154,11 @@ export default {
             <div class="flex-grow overflow-y-auto overflow-x-auto">
               <p
                 v-for="attr in attributes"
-                v-bind:key="attr.key"
-                class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1"
-                :class="attr.customData.class"
+                v-bind:key="attr.id"
+                class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1 p"
+                id="day-background"
               >
-                {{ attr.customData.title }}
+                {{ attr.customData.eventName }}
               </p>
             </div>
           </div>
@@ -144,8 +168,8 @@ export default {
   </div>
 </template>
 
-<style lang="postcss" scoped>
-<meta
+<style lang="scss" scoped>
+/*<meta
   name="viewport"
   content="width=device-width, initial-scale=1"
   > ::-webkit-scrollbar {
@@ -153,7 +177,7 @@ export default {
 }
 ::-webkit-scrollbar-track {
   display: none;
-}
+}*/
 
 button {
   margin-top: 20px;
@@ -211,6 +235,10 @@ button {
   }
   * {
     box-sizing: border-box;
+  }
+
+  .p {
+    background-color: #ff0000;
   }
 }
 </style>

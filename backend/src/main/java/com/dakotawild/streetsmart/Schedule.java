@@ -1,22 +1,28 @@
 package com.dakotawild.streetsmart;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="Schedules")
+@Document(collection = "Schedules")
 public class Schedule {
-    
+
     @Id
     public String id;
 
     private String eventName;
     private String eventStartTime;
-    private String eventDate;
+    private Date eventDate;
     private String arrivalTime;
     private String address;
     private String userEmail;
     private String leaveByTime;
 
-    public Schedule(String eventName, String eventStartTime, String eventDate, String arrivalTime, String address, String userEmail, String leaveByTime){
+    public Schedule(String eventName, String eventStartTime, Date eventDate, String arrivalTime, String address,
+            String userEmail, String leaveByTime) throws ParseException {
         this.eventName = eventName;
         this.eventStartTime = eventStartTime;
         this.eventDate = eventDate;
@@ -28,34 +34,33 @@ public class Schedule {
 
     @Override
     public String toString() {
-      return String.format(
-          "Schedule[id=%s, eventName='%s', eventStartTime='%s', eventDate='%s', arrivalTime='%s', address='%s', userEmail='%s']",
-          id, eventName, eventStartTime, eventDate, arrivalTime, address, userEmail);
+        return String.format(
+                "Schedule[id=%s, eventName='%s', eventStartTime='%s', eventDate='%s', arrivalTime='%s', address='%s', userEmail='%s']",
+                id, eventName, eventStartTime, eventDate, arrivalTime, address, userEmail);
     }
 
-    public String getEventName(){
+    public String getEventName() {
         return this.eventName;
     }
 
-    public void setEventName(String eventName){
+    public void setEventName(String eventName) {
         this.eventName = eventName;
     }
 
-    public String getEventStartTime(){
+    public String getEventStartTime() {
         return this.eventStartTime;
     }
 
-    public void setEventStartTime(String eventStartTime){
+    public void setEventStartTime(String eventStartTime) {
         this.eventStartTime = eventStartTime;
     }
 
-
-    public String getEventDate(){
+    public Date getEventDate() {
         return this.eventDate;
     }
 
-    public void setEventDate(String eventDate){
-        this.eventDate = eventDate;
+    public void setEventDate(String eventDate) throws ParseException {
+        this.eventDate = new SimpleDateFormat("yyyy-MM-dd").parse(eventDate);
     }
 
     public String getEventArrivalTime(){

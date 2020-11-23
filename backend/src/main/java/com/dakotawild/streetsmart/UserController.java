@@ -2,6 +2,7 @@ package com.dakotawild.streetsmart;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +78,7 @@ public class UserController {
   }
 
   @PostMapping("/schedule")
-  public Schedule postSchedule(@RequestBody Schedule schedule) {
+  public Schedule postSchedule(@RequestBody Schedule schedule) throws ParseException {
     Schedule _schedule = scheduleRepository.save(new Schedule(schedule.getEventName(), schedule.getEventStartTime(),
         schedule.getEventDate(), schedule.getEventArrivalTime(), schedule.getEventAddress(), schedule.getEventEmail(),
         schedule.getLeaveByTime()));

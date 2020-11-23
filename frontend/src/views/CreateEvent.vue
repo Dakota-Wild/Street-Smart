@@ -231,7 +231,7 @@ export default {
       var data = {
         eventName: this.schedule.eventName,
         eventStartTime: this.schedule.eventStartTime,
-        eventDate: this.schedule.eventDate,
+        eventDate: new Date(this.schedule.eventDate),
         arrivalTime: this.schedule.arrivalTime,
         address: this.schedule.address,
         userEmail: this.schedule.userEmail,
