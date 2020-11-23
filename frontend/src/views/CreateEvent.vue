@@ -133,50 +133,36 @@ export default {
   },
 
   mounted() {
-    // let placeSearch;
-    const componentForm = {
-      street_number: "short_name",
-      route: "long_name",
-      locality: "long_name",
-      administrative_area_level_1: "short_name",
-      country: "long_name",
-      postal_code: "short_name",
-    };
-
+    // document.getElementById("addressInput").value = this.schedule.address;
+    // document.getElementById("addressInput").value = this.schedule.address
     let google = window.google;
     // Create the autocomplete object, restricting the search predictions to
     // geographical location types.
-    let autocomplete = new google.maps.places.Autocomplete(
-      document.getElementById("addressInput"),
-      { types: ["geocode"] }
-    );
+    let autocomplete = new google.maps.places.Autocomplete(document.getElementById("addressInput"))
     // Avoid paying for data that you don't need by restricting the set of
     // place fields that are returned to just the address components.
     autocomplete.setFields(["address_component"]);
-    // When the user selects an address from the drop-down, populate the
-    // address fields in the form.
-    autocomplete.addListener(
-      "place_changed",
-      fillInAddress(componentForm, autocomplete)
-    );
   },
-
-  //   autocomplete.addListener("place_changed", () => {
-
-  // });
 
   methods: {
     calculate() {
       this.schedule.address = document.getElementById("addressInput").value;
-      //upon saveSchedule calculate the time to leave by
+      // console.log("document.getElementById(\"addressInput\")" + document.getElementById("addressInput").value)
+      //upon submit calculate the time to leave by
+
       const origin = { lat: 34.0589, lng: -117.8194 } // cpp by default
       // const destination = { lat: 34.068921, lng: -118.4473698 } //ucla by default
       let google = window.google
       // const geocoder = new google.maps.Geocoder();
       const service = new google.maps.DistanceMatrixService();
+      
+      var tempArrivalTime = this.schedule.arrivalTime;
+      var arrivalTimeHours = tempArrivalTime.substring(0,2);
+      var arrivalTimeMinutes = tempArrivalTime.substring(3,5);
+      var N = arrivalTimeHours*(60000*60) + arrivalTimeMinutes*60000
+
       var tempTime;
 
-      console.log(this.schedule.address);
       service.getDistanceMatrix(
         {
           origins: [origin],
@@ -185,6 +171,10 @@ export default {
           unitSystem: google.maps.UnitSystem.IMPERIAL,
           avoidHighways: false,
           avoidTolls: false,
+          drivingOptions: {
+            departureTime: new Date(Date.now() + N),  // for the time N milliseconds from now.
+            trafficModel: 'optimistic'
+  }
         },
         (response, status) => { //this part of the code waits for the response for google then runs the below code
           if (status !== "OK") {
@@ -203,10 +193,7 @@ export default {
               // var drivingTimeSeconds = drivingTime.substring(6);
               // console.log(drivingTimeHours + " " + drivingTimeMinutes);
 
-              var tempArrivalTime = this.schedule.arrivalTime;
               // console.log(tempArrivalTime);
-              var arrivalTimeHours = tempArrivalTime.substring(0,2);
-              var arrivalTimeMinutes = tempArrivalTime.substring(3,5);
               // console.log(arrivalTimeHours + " " + arrivalTimeMinutes);
 
               var leaveTimeMinutes = null;
@@ -233,8 +220,9 @@ export default {
               }
               var leaveTime = leaveTimeHours + ":" + leaveTimeMinutes + " " + leaveTimePeriod;
               console.log(leaveTime);
-              this.schedule.leaveByTime = leaveTime;
               //end of 4AM calculation code
+
+              this.schedule.leaveByTime = leaveTime;
               this.saveSchedule();
             }
           }
@@ -267,22 +255,5 @@ export default {
     },
   },
 };
-function fillInAddress(componentForm, autocomplete) {
-  // Get the place details from the autocomplete object.
-  const place = autocomplete.getPlace();
-  for (const component in componentForm) {
-    document.getElementById(component).value = "";
-    document.getElementById(component).disabled = false;
-  }
-  // Get each component of the address from the place details,
-  // and then fill-in the corresponding field on the form.
-  for (const component of place.address_components) {
-    const addressType = component.types[0];
-    if (componentForm[addressType]) {
-      const val = component[componentForm[addressType]];
-      document.getElementById(addressType).value = val;
-    }
-  }
-}
 </script>
 <style></style>
