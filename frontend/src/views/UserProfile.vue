@@ -17,57 +17,31 @@
           <card shadow type="secondary">
             <div slot="header" class="bg-white border-0">
               <div class="row align-items-center">
-                <div class="col-8">
-                  <h3 class="mb-0">My account</h3>
+                <div class="col-8" style="margin: auto">
+                  <h3 class="mb-0">My Account</h3>
                 </div>
               </div>
             </div>
-            <template>
-              <div class="submitform">
-                <div v-if="!submitted">
-                  <form @submit.prevent>
-                    <div class="pl-lg-4">
-                      <div class="row">
-                        <div class="col-lg-6">
-                          <div class="firstName">
-                            <strong>First Name</strong>
-                          </div>
-                          <div id="fname"></div>
-                        </div>
-                        <div class="col-lg-6">
-                          <div class="firstName">
-                            <strong>Last Name</strong>
-                          </div>
-                          <div id="fname"></div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-lg-6">
-                          <div class="firstName">
-                            <strong>Email</strong>
-                          </div>
-                          <div id="fname"></div>
-                        </div>
-                        <div class="col-lg-6">
-                          <div class="firstName">
-                            <strong>Password</strong>
-                          </div>
-                          <div id="fname"></div>
-                        </div>
-                      </div>
-                      <button v-on:click="saveUser" class="btn btn-success">
-                        Submit
-                      </button>
-                    </div>
-                  </form>
-                </div>
-                <div v-else>
-                  <h4>You submitted successfully!</h4>
-                  <button class="btn btn-success" v-on:click="newUser">
-                    Add
-                  </button>
-                </div>
-                <hr class="my-4" />
+            <template>   
+              <div class="pl-lg-4">
+                <table style="margin: auto; width: 100%">
+                  <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                  </tr>
+                  <tr>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                  </tr>
+                  <tr>
+                    <th>Email</th>
+                    <th>Password</th>
+                  </tr>
+                  <tr>
+                    <td>{{ user.email }}</td>
+                    <td style="color: gray">Hidden</td>
+                  </tr>
+                </table>
               </div>
             </template>
           </card>
@@ -83,10 +57,18 @@ export default {
   mounted() {
     this.user.email = this.$store.state.email;
     this.getUser();
-    const fnameDiv = document.getElementById("fname");
-    fnameDiv.innerHTML = this.user.firstName;
   },
-
+  data() {
+    return {
+      user: {
+        id: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: ''
+      }
+    }
+  },
   methods: {
     getUser() {
       http

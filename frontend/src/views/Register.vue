@@ -30,7 +30,7 @@
                         <base-input id = "homeAddressInput"
                                     class="input-group alternative"
                                     placeholder="Home Address"
-                                    addon-left-icon="ni ni-lock-circle-open"
+                                    addon-left-icon="ni ni-square-pin"
                                     v-model="user.homeAddress">
                         </base-input>
 
@@ -40,12 +40,12 @@
                                     addon-left-icon="ni ni-lock-circle-open"
                                     v-model="user.password">
                         </base-input>
-
+                        <!---
                         <base-input class="input-group alternative"
                                     placeholder="Re-Enter Password"
                                     type="password"
                                     addon-left-icon="ni ni-lock-circle-open">
-                        </base-input>
+                        </base-input>--->
 
                         <div class="text-center">
                             <router-link to="/login" class="text-light">
