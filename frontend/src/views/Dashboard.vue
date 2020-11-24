@@ -35,9 +35,9 @@ export default {
   components: {
     Maps,
   },
-  created() {
+  /*created() {
     this.getEvents();
-  },
+  },*/
   mounted() {
     this.user.email = this.$store.state.email;
     this.getEvents();
