@@ -12,7 +12,7 @@
               v-for="event in schedule"
               v-bind:key="event.id"
             >
-              Event: {{ event.eventName }}, Date: {{ event.eventDate }}, Leave
+              Event: {{ event.eventName }} <br/>Date: {{ event.eventDate }} <br/>Leave
               By: {{ event.leaveByTime }}
             </li>
           </ul>
@@ -35,9 +35,6 @@ export default {
   components: {
     Maps,
   },
-  /*created() {
-    this.getEvents();
-  },*/
   mounted() {
     this.user.email = this.$store.state.email;
     this.getEvents();
@@ -61,6 +58,10 @@ export default {
         .get("/schedule/" + this.user.email)
         .then((response) => {
           this.schedule = response.data;
+          this.schedule.forEach(event => {
+            var date = new Date(Date.parse(event.eventDate));
+            event.eventDate = date.getMonth()+1 + '/' + date.getDate() + '/' + date.getFullYear();
+          });
         })
         .catch((e) => {
           console.log(e);

@@ -47,6 +47,7 @@ export default {
               };
                 tempEvent.key = event.id;
                 tempEvent.customData.eventName = event.eventName;
+                tempEvent.customData.eventStartTime = event.eventStartTime;
                 tempEvent.dates = event.eventDate;
                 this.attributes.push(tempEvent);
               });
@@ -60,28 +61,28 @@ export default {
 </script>
 
 <template>
-  <div class="text-center section">
-    <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
+  <div class="text-center section full-width">
+    <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8 full-width">
     </base-header>
-    <div class="container-fluid mt--7">
+    <div class="container-fluid mt--7 full-width">
       <vc-calendar
-        class="custom-calendar max-w-full"
+        class="custom-calendar full-width"
         :masks="masks"
         :attributes="attributes"
         disable-page-swipe
         is-expanded
       >
-        <template v-slot:day-content="{ day, attributes }">
-          <div class="flex flex-col h-full z-10 overflow-hidden">
+        <template v-slot:day-content="{ day, attributes }" class="full-width">
+          <div class="flex flex-col h-full z-10 overflow-hidden full-width">
             <span class="day-label text-sm text-gray-900">{{ day.day }}</span>
-            <div class="flex-grow overflow-y-auto overflow-x-auto">
+            <div class="flex-grow overflow-y-auto overflow-x-auto full-width">
               <p
                 v-for="attr in attributes"
                 v-bind:key="attr.id"
-                class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1 p"
+                class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1 p full-width"
                 id="day-background"
               >
-                {{ attr.customData.eventName }}
+                {{ attr.customData.eventName }} <br/> {{ attr.customData.eventStartTime }} 
               </p>
             </div>
           </div>
@@ -163,6 +164,10 @@ button {
   .p {
     background-color: #eb2d3a;
     color: #ffffff;
+  }
+
+  .full-width {
+    width: 100%;
   }
 }
 </style>

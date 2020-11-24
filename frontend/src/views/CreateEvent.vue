@@ -216,6 +216,10 @@ export default {
                 leaveTimePeriod = "am";
               }
             }
+            leaveTimeMinutes = leaveTimeMinutes.toString();
+            if(leaveTimeMinutes.length == 1) {
+              leaveTimeMinutes = "0" + leaveTimeMinutes;
+            }
             var leaveTime =
               leaveTimeHours + ":" + leaveTimeMinutes + " " + leaveTimePeriod;
             console.log(leaveTime);
